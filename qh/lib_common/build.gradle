@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion build_versions.target_sdk
+
+    defaultConfig {
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86","x86_64"
+        }
+    }
+
+    buildTypes {
+        debug{
+            buildConfigField "boolean", 'IS_DEBUG', 'true'
+        }
+        release {
+            buildConfigField "boolean", 'IS_DEBUG', 'false'
+        }
+    }
+
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+
+    api deps.junit
+    api deps.testrunner
+    api deps.testespresso
+
+    api deps.support.app_compat
+    api deps.support.v4
+    api deps.support.v13
+    api deps.support.design
+    api deps.support.cardview
+    api deps.support.percent
+    api deps.support.recyclerview
+    api deps.support.multidex
+    api deps.support.constraint_layout
+
+    api deps.rxlifecycle
+    api deps.rxlifecycle_android
+    api deps.rxlifecycle_components
+}
