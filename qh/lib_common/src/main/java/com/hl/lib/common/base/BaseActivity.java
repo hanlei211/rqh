@@ -15,7 +15,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//        setContentView(R.layout.activity_root);
+        setContentView(R.layout.activity_root);
 //        initCommonView();
 //        ARouter.getInstance().inject(this);
 //        initView();
