@@ -31,19 +31,19 @@
             <!--android:layout_height="match_parent"-->
             <!--android:layout="@layout/stub_trans_loading"-->
             <!--/>-->
-        <!--<ViewStub-->
-            <!--android:id="@+id/view_stub_nodata"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout="@layout/stub_no_data"-->
-            <!--/>-->
+        <ViewStub
+            android:id="@+id/view_stub_nodata"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/stub_no_data"
+            />
 
-        <!--<ViewStub-->
-            <!--android:id="@+id/view_stub_error"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout="@layout/stub_net_error"-->
-            <!--/>-->
+        <ViewStub
+            android:id="@+id/view_stub_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/stub_net_error"
+            />
 
     </RelativeLayout>
 </RelativeLayout>

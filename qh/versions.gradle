@@ -13,6 +13,9 @@ versions.junit = "4.12"
 versions.testrunner = "1.0.2"
 versions.testespresso = "3.0.2"
 
+versions.arouter_compiler = "1.2.2"
+versions.arouter_api = "1.4.1"
+
 versions.eventbus = "3.1.1"
 
 versions.rxjava2 = "2.2.0"
@@ -58,6 +61,11 @@ deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_g
 deps.junit = "junit:junit:$versions.junit"
 deps.testrunner = "com.android.support.test:runner:$versions.testrunner"
 deps.testespresso = "com.android.support.test.espresso:espresso-core:$versions.testespresso"
+
+
+//路由跳转
+deps.arouter_api = "com.alibaba:arouter-api:$versions.arouter_api"
+deps.arouter_compiler = "com.alibaba:arouter-compiler:$versions.arouter_compiler"
 
 //事件传递
 deps.eventbus = "org.greenrobot:eventbus:$versions.eventbus"
