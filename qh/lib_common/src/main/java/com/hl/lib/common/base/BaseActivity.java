@@ -1,5 +1,6 @@
 package com.hl.lib.common.base;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,10 +10,10 @@ import android.view.ViewStub;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.hl.lib.common.Interface.IView;
 import com.hl.lib.common.R;
 import com.hl.lib.common.manager.ActivityManager;
 import com.hl.lib.common.util.NetUtil;
-import com.hl.lib.common.view.BaseView;
 import com.hl.lib.common.view.LoadingInitView;
 import com.hl.lib.common.view.NetErrorView;
 import com.hl.lib.common.view.NoDataView;
@@ -20,7 +21,7 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
-public abstract class BaseActivity extends RxAppCompatActivity implements BaseView {
+public abstract class BaseActivity extends RxAppCompatActivity  implements IView {
     private ViewStub mViewStubToolbar;
     private ViewStub mViewStubContent;
     private ViewStub mViewStubInitLoading;
@@ -57,11 +58,11 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
             View view = mViewStubToolbar.inflate();
             initToolbar(view);
         }
-        mViewStubContent.setLayoutResource(onBindContentLayout());
+        mViewStubContent.setLayoutResource(getLayoutId());
         mViewStubContent.inflate();
     }
 
-    public abstract int onBindContentLayout();
+    public abstract int getLayoutId();
 
     private void initToolbar(View view) {
         mToolbar = view.findViewById(R.id.toolbar_root);
@@ -85,9 +86,13 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
     public int onBindToolbarLayout() {
         return R.layout.common_toolbar;
     }
-
+    /**
+     * 初始化view
+     */
     public abstract void initView();
-
+    /**
+     * 初始化数据
+     */
     public abstract void initData();
 
     public void initListener() {
@@ -167,6 +172,24 @@ public abstract class BaseActivity extends RxAppCompatActivity implements BaseVi
 
     public void hideNetWorkErrView() {
         showNetWorkErrView(false);
+    }
+
+
+    /**
+     * 关掉activity
+     */
+    @Override
+    public void finishActivity() {
+
+    }
+
+    /**
+     * 获取当前context
+     * @return
+     */
+    @Override
+    public Context getContext() {
+        return null;
     }
 
 }
