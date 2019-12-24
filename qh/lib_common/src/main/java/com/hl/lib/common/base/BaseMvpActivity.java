@@ -1,6 +1,5 @@
 package com.hl.lib.common.base;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 

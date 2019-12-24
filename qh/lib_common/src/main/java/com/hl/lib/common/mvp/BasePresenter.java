@@ -2,7 +2,6 @@ package com.hl.lib.common.mvp;
 
 import com.hl.lib.common.Interface.IPresenter;
 import com.hl.lib.common.Interface.IView;
-import com.hl.lib.common.base.BaseActivity;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
 import java.lang.ref.WeakReference;
@@ -79,4 +78,5 @@ public abstract class BasePresenter<M extends BaseModel, V extends IView> implem
             getView().showNoDataView();
         }
     }
+
 }

@@ -189,7 +189,7 @@ public abstract class BaseActivity extends RxAppCompatActivity  implements IView
      */
     @Override
     public Context getContext() {
-        return null;
+        return this;
     }
 
 }
