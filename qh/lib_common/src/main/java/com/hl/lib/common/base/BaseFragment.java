@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.hl.lib.common.Interface.IView;
 import com.hl.lib.common.R;
+import com.hl.lib.common.event.common.BaseFragmentEvent;
 import com.hl.lib.common.util.NetUtil;
 import com.hl.lib.common.view.LoadingInitView;
 import com.hl.lib.common.view.NetErrorView;
@@ -22,6 +23,8 @@ import com.hl.lib.common.view.NoDataView;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public abstract class BaseFragment extends Fragment implements IView {
     protected static final String TAG = BaseFragment.class.getSimpleName();
@@ -234,5 +237,9 @@ public abstract class BaseFragment extends Fragment implements IView {
         if(show){
             mNoDataView.setNoDataView(resid);
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public <T> void onEvent(BaseFragmentEvent<T> event) {
     }
 }

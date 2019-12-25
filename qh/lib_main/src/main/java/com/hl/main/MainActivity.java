@@ -2,7 +2,6 @@ package com.hl.main;
 
 
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -37,7 +36,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        BottomNavigationView navigationView = findViewById(R.id.navigation);
+        BottomNavigationView navigationView = (BottomNavigationView)findViewById(R.id.navigation);
         //底部导航栏选择切换
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -62,6 +61,19 @@ public class MainActivity extends BaseActivity {
                 return false;
             }
         });
+        if(mNewsProvider != null){
+            mNewsFragment = mNewsProvider.getMainNewsFragment();
+        }
+        if(mFindProvider != null){
+            mFindFragment = mFindProvider.getMainFindFragment();
+        }
+        if(mMeProvider != null){
+            mMeFragment = mMeProvider.getMainMeFragment();
+        }
+        mCurrFragment = mNewsFragment;
+        if(mNewsFragment != null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, mNewsFragment, MainChannel.NEWS.name).commit();
+        }
     }
 
     public void switchContent(Fragment start, Fragment to, String tag) {
@@ -74,6 +86,11 @@ public class MainActivity extends BaseActivity {
         } else {
             transaction.hide(start).show(to).commit();
         }
+    }
+
+    @Override
+    public boolean enableToolbar() {
+        return false;
     }
 
     @Override
