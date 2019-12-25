@@ -8,7 +8,7 @@ package com.hl.main.entity;
  * Update:     <br>
  */
 public enum MainChannel {
-    NEWS(0,"NEWS"), FIND(1,"FIND"),ME(2,"ME");
+    NEWS(0,"NEWS"), VIDEO(1,"VIDEO"),ATTENTION(2,"ATTENTION"),ME(3,"ME");
     public int id;
     public String name;
     MainChannel(int id, String name){

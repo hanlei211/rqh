@@ -9,9 +9,10 @@ import android.view.MenuItem;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.hl.lib.common.base.BaseActivity;
-import com.hl.lib.common.provider.IFindProvider;
+import com.hl.lib.common.provider.IAttentionProvider;
 import com.hl.lib.common.provider.IMeProvider;
 import com.hl.lib.common.provider.INewsProvider;
+import com.hl.lib.common.provider.IVideoProvider;
 import com.hl.main.entity.MainChannel;
 
 public class MainActivity extends BaseActivity {
@@ -20,13 +21,17 @@ public class MainActivity extends BaseActivity {
     INewsProvider mNewsProvider;
 
     @Autowired(name = "/find/main")
-    IFindProvider mFindProvider;
+    IAttentionProvider mAttentionProvider;
+
+    @Autowired(name = "/video/main")
+    IVideoProvider mVideoProvider;
 
     @Autowired(name = "/me/main")
     IMeProvider mMeProvider;
 
     private Fragment mNewsFragment;
-    private Fragment mFindFragment;
+    private Fragment mAttentionFragment;
+    private Fragment mVideoFragment;
     private Fragment mMeFragment;
     private Fragment mCurrFragment;
     @Override
@@ -47,9 +52,14 @@ public class MainActivity extends BaseActivity {
                     mCurrFragment = mNewsFragment;
 
                     return true;
-                } else if (i == R.id.navigation_discover) {
-                    switchContent(mCurrFragment, mFindFragment, MainChannel.FIND.name);
-                    mCurrFragment = mFindFragment;
+                }else if (i == R.id.navigation_video) {
+                    switchContent(mCurrFragment, mVideoFragment, MainChannel.ATTENTION.name);
+                    mCurrFragment = mVideoFragment;
+
+                    return true;
+                } else if (i == R.id.navigation_attention) {
+                    switchContent(mCurrFragment, mVideoFragment, MainChannel.ATTENTION.name);
+                    mCurrFragment = mAttentionFragment;
 
                     return true;
                 } else if (i == R.id.navigation_me) {
@@ -64,8 +74,11 @@ public class MainActivity extends BaseActivity {
         if(mNewsProvider != null){
             mNewsFragment = mNewsProvider.getMainNewsFragment();
         }
-        if(mFindProvider != null){
-            mFindFragment = mFindProvider.getMainFindFragment();
+        if(mVideoProvider != null){
+            mVideoFragment = mVideoProvider.getMainFindFragment();
+        }
+        if(mAttentionProvider != null){
+            mAttentionFragment = mAttentionProvider.getMainFindFragment();
         }
         if(mMeProvider != null){
             mMeFragment = mMeProvider.getMainMeFragment();
