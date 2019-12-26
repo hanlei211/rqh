@@ -24,6 +24,9 @@ versions.adapter_rxjava2 = "2.4.0"
 //versions.converter_gson = "2.5.0"
 versions.converter_gson = "2.4.0"
 versions.logging_interceptor = "3.9.1"
+versions.okhttp = "3.12.2"
+versions.retrofit = "2.5.0"
+versions.disklrucache = "2.0.2"
 
 versions.glide = "4.8.0"
 versions.glide_compiler = "4.8.0"
@@ -34,6 +37,8 @@ versions.rxlifecycle_components = "2.2.1"
 
 versions.nohttp = "1.1.4"
 versions.nohttp_ok = "1.1.4"
+
+
 
 
 
@@ -70,12 +75,15 @@ deps.arouter_compiler = "com.alibaba:arouter-compiler:$versions.arouter_compiler
 //事件传递
 deps.eventbus = "org.greenrobot:eventbus:$versions.eventbus"
 
-//Rxjava
+//Rxjava  okhttp
 deps.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
 deps.rxandroid = "io.reactivex.rxjava2:rxandroid:$versions.rxandroid"
 deps.adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:$versions.adapter_rxjava2"
 deps.converter_gson = "com.squareup.retrofit2:converter-gson:$versions.converter_gson"
 deps.logging_interceptor = "com.squareup.okhttp3:logging-interceptor:$versions.logging_interceptor"
+deps.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+deps.okhttp = "com.squareup.okhttp3:okhttp:$versions.okhttp"
+deps.disklrucache = "com.jakewharton:disklrucache:$versions.disklrucache"
 
 //图片依赖
 deps.glide = "com.github.bumptech.glide:glide:$versions.glide"
@@ -89,6 +97,10 @@ deps.rxlifecycle_components = "com.trello.rxlifecycle2:rxlifecycle-components:$v
 //nohttp
 deps.nohttp = "com.yanzhenjie.nohttp:nohttp:$versions.nohttp"
 deps.nohttp_ok = "com.yanzhenjie.nohttp:okhttp:$versions.nohttp_ok"
+
+
+
+
 
 ext.deps = deps
 

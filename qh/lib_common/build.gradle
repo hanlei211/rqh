@@ -33,7 +33,7 @@ dependencies {
     api deps.junit
     api deps.testrunner
     api deps.testespresso
-    api deps.eventbus;
+    api deps.eventbus
 
 
     api deps.support.app_compat
@@ -51,4 +51,12 @@ dependencies {
     api deps.rxlifecycle
     api deps.rxlifecycle_android
     api deps.rxlifecycle_components
+
+    api deps.okhttp
+    api deps.logging_interceptor
+    api deps.retrofit
+    api deps.converter_gson
+    api deps.adapter_rxjava2
+    api deps.rxjava2
+    api deps.rxandroid
 }
