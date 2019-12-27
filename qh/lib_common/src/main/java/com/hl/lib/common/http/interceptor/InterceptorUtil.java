@@ -12,7 +12,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 public class InterceptorUtil {
     public static final String TAG="okhttp";
     //日志拦截器
-    private static HttpLoggingInterceptor logInterceptor(){
+    public static HttpLoggingInterceptor logInterceptor(){
           return new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
               @Override
               public void log(String message) {
@@ -22,7 +22,7 @@ public class InterceptorUtil {
     }
 
     //头部拦截器
-    private static Interceptor headerInterceptor(){
+    public static Interceptor headerInterceptor(){
         return  new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
