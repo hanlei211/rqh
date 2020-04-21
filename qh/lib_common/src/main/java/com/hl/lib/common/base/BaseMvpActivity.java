@@ -1,44 +1,26 @@
 package com.hl.lib.common.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 
+import com.hl.lib.common.mvp.BaseModel;
 import com.hl.lib.common.mvp.BasePresenter;
 
-public abstract  class BaseMvpActivity<P extends BasePresenter> extends BaseActivity {
+public abstract  class BaseMvpActivity<T extends BasePresenter, E extends BaseModel> extends AppCompatActivity {
 
-    protected P mPresenter;
-
+    public T mPresenter;
+    public E mModel;
+    public Context mContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initPresenter();
     }
 
-    public void initPresenter() {
-        mPresenter = createPresenter();
-        if(mPresenter != null){
-            mPresenter.attachView(this);
-            mPresenter.injectLifecycle(this);
-        }
-    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if(mPresenter != null ){
-            mPresenter.detachView();
-            mPresenter= null;
-        }
-    }
 
-    /**
-     * 创建Presenter
-     *
-     * @return Presenter
-     */
-    protected abstract P createPresenter();
 
 
 

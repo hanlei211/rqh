@@ -2,6 +2,13 @@
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/lib_common/src/main/java/com/hl/lib/common/http/request/BaseRequest.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/module_news/src/main/java/com/hl/lib_news/contract/NewsDetailContract.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/module_news/src/main/java/com/hl/lib_news/contract/NewsListContract.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/module_news/src/main/java/com/hl/lib_news/contract/NewsTypeContract.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/module_news/src/main/java/model/NewsDetailModel.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/module_news/src/main/java/model/NewsListModel.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/module_news/src/main/java/model/NewsTypeModel.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/module_news/src/main/res/layout/activity_main.xml" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
