@@ -110,4 +110,15 @@ public class Zhttp {
         }
     }
 
+    public int getRetryCount() {
+        return DEFAULT_RETRY_COUNT;
+    }
+
+    public int getRetryDelay() {
+        return DEFAULT_RETRY_DELAY;
+    }
+
+    public int getRetryIncreaseDelay() {
+        return DEFAULT_RETRY_INCREASEDELAY;
+    }
 }
