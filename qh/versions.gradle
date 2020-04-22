@@ -38,6 +38,8 @@ versions.rxlifecycle_components = "2.2.1"
 versions.nohttp = "1.1.4"
 versions.nohttp_ok = "1.1.4"
 
+versions.butterknife = "7.0.1"
+
 
 
 
@@ -97,6 +99,9 @@ deps.rxlifecycle_components = "com.trello.rxlifecycle2:rxlifecycle-components:$v
 //nohttp
 deps.nohttp = "com.yanzhenjie.nohttp:nohttp:$versions.nohttp"
 deps.nohttp_ok = "com.yanzhenjie.nohttp:okhttp:$versions.nohttp_ok"
+
+// buttterknife
+deps.butterknife = "com.jakewharton:butterknife:$versions.butterknife"
 
 
 

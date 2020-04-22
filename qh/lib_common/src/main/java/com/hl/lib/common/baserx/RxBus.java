@@ -4,7 +4,9 @@ package com.hl.lib.common.baserx;
 import java.util.HashMap;
 
 import io.reactivex.BackpressureStrategy;
+import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -36,14 +38,19 @@ public class RxBus {
     }
 
 
-    public void post(Object o){
+
+    public void post(@NonNull Object content) {
+        post(content.getClass().getName(), content);
+    }
+
+    public void post(Object type,Object o){
         mSubject.onNext(o);
     }
 
     /**
      * 返回实例
      */
-    pulic <T>Flowable<T> getObservable(Class<T> type){
+    public <T> Flowable<T> getObservable(Class<T> type){
         return mSubject.toFlowable(BackpressureStrategy.BUFFER).ofType(type);
     }
 
@@ -64,11 +71,6 @@ public class RxBus {
                 .subscribe(next,error);
     }
 
-
-    public  <T> void register(){
-
-    }
-
     /**
      * 是否已有观察者订阅
      *
@@ -82,17 +84,17 @@ public class RxBus {
      * @param o
      * @param disposable
      */
-    public void addSubscription(Object o, Disposable disposable) {
+    public void addSubscription(Object o, Consumer<Object> disposable) {
         if (mSubscriptionMap == null) {
             mSubscriptionMap = new HashMap<>();
         }
         String key = o.getClass().getName();
         if (mSubscriptionMap.get(key) != null) {
-            mSubscriptionMap.get(key).add(disposable);
+            mSubscriptionMap.get(key).add((Disposable) disposable);
         } else {
             //一次性容器,可以持有多个并提供 添加和移除。
             CompositeDisposable disposables = new CompositeDisposable();
-            disposables.add(disposable);
+            disposables.add((Disposable) disposable);
             mSubscriptionMap.put(key, disposables);
         }
     }

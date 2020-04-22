@@ -12,15 +12,14 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.hl.lib.common.Interface.IView;
 import com.hl.lib.common.R;
+import com.hl.lib.common.baseapp.AppManager;
 import com.hl.lib.common.event.common.BaseActivityEvent;
-import com.hl.lib.common.manager.ActivityManager;
 import com.hl.lib.common.util.NetUtil;
 import com.hl.lib.common.view.LoadingInitView;
 import com.hl.lib.common.view.NetErrorView;
 import com.hl.lib.common.view.NoDataView;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -48,8 +47,7 @@ public abstract class BaseActivity extends RxAppCompatActivity  implements IView
         initView();
         initListener();
         initData();
-        EventBus.getDefault().register(this);
-        ActivityManager.getInstance().addActivity(this);
+        AppManager.getAppManager().addActivity(this);
     }
 
     private void initCommonView() {
@@ -104,8 +102,7 @@ public abstract class BaseActivity extends RxAppCompatActivity  implements IView
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
-        ActivityManager.getInstance().finishActivity(this);
+        AppManager.getAppManager().finishActivity(this);
     }
 
     public void showInitLoadView() {

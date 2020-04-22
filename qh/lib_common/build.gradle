@@ -59,4 +59,6 @@ dependencies {
     api deps.adapter_rxjava2
     api deps.rxjava2
     api deps.rxandroid
+
+    api deps.butterknife
 }

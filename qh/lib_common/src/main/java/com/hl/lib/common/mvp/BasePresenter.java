@@ -2,6 +2,7 @@ package com.hl.lib.common.mvp;
 
 import com.hl.lib.common.Interface.IPresenter;
 import com.hl.lib.common.Interface.IView;
+import com.hl.lib.common.baserx.RxManager;
 import com.trello.rxlifecycle2.LifecycleProvider;
 
 import java.lang.ref.WeakReference;
@@ -11,6 +12,8 @@ public abstract class BasePresenter<M extends BaseModel, V extends IView> implem
 
     protected M mModel;
     protected WeakReference<V> mView;
+
+    private RxManager rxManager = new RxManager();
 
     @Override
     public void attachView(V view) {
@@ -49,6 +52,10 @@ public abstract class BasePresenter<M extends BaseModel, V extends IView> implem
         if (mModel != null) {
             mModel = null;
         }
+        if( rxManager != null){
+            rxManager.clear();
+        }
+
     }
 
     public V getView() {

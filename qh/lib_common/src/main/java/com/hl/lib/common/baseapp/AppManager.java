@@ -1,30 +1,24 @@
-package com.hl.lib.common.manager;
-
-
+package com.hl.lib.common.baseapp;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
+import android.drm.DrmStore;
 
 import java.util.Stack;
 
 /**
- * activity 统一管理
+ * activity 管理
  */
-public class ActivityManager {
+public class AppManager {
+    private Stack<Activity> activityStack;
+    private static volatile AppManager instance;
 
-    private static Stack<Activity> activityStack;
-    private volatile static ActivityManager instance;
-
-    public ActivityManager() {
-
-    }
-
-
-    public static ActivityManager getInstance() {
+    public static AppManager getAppManager() {
         if (instance == null) {
-            synchronized (ActivityManager.class) {
+            synchronized (AppManager.class) {
                 if (instance == null) {
-                    instance = new ActivityManager();
+                    instance = new AppManager();
                     instance.activityStack = new Stack<>();
                 }
             }
@@ -33,35 +27,39 @@ public class ActivityManager {
     }
 
     /**
-     * 添加Activity到堆栈
+     * 添加 activity 到任务栈
+     *
+     * @param mActivity
      */
-    public void addActivity(Activity activity){
-        if(activityStack == null){
-            activityStack = new Stack();
+    public void addActivity(Activity mActivity) {
+        if (activityStack == null) {
+            activityStack = new Stack<>();
         }
-            activityStack.add(activity);
+        activityStack.add(mActivity);
     }
-
 
     /**
      * 移出指定activity
-     * @param activity
+     *
+     * @param mActivity
      */
-    public void removeActivity(Activity activity){
-        if (activity != null) {
-            activityStack.remove(activity);
-            activity = null;
+    public void removeActivity(Activity mActivity) {
+        if (mActivity != null) {
+            activityStack.remove(mActivity);
+            mActivity = null;
         }
     }
 
+
     /**
-     * 获取栈顶activity
+     * 获取当前activity
+     *
      * @return
      */
-    public Activity currentActivity(){
+    public Activity getCurrentActivity() {
         try {
-            Activity activity = activityStack.lastElement();
-            return activity;
+            Activity mActivity = activityStack.lastElement();
+            return mActivity;
         } catch (Exception e) {
             return null;
         }
@@ -132,23 +130,25 @@ public class ActivityManager {
      * @param cls
      */
     public void returnToActivity(Class<?> cls) {
-        while (activityStack.size() != 0) if (activityStack.peek().getClass() == cls) {
-            break;
-        } else {
-            finishActivity(activityStack.peek());
-        }
+        while (activityStack.size() != 0)
+            if (activityStack.peek().getClass() == cls) {
+                break;
+            } else {
+                finishActivity(activityStack.peek());
+            }
     }
 
 
     /**
-     * 是否打开activity
+     * 是否已经打开指定的activity
+     *
      * @param cls
      * @return
      */
-    public boolean isOpenActivity(Class<?> cls){
-        if(activityStack!=null ){
-            for(int i=0;i<activityStack.size();i++){
-                if(cls ==activityStack.peek().getClass()){
+    public boolean isOpenActivity(Class<?> cls) {
+        if (activityStack != null) {
+            for (int i = 0, size = activityStack.size(); i < size; i++) {
+                if (cls == activityStack.peek().getClass()) {
                     return true;
                 }
             }
@@ -162,10 +162,11 @@ public class ActivityManager {
      * @param context      上下文
      * @param isBackground 是否开开启后台运行
      */
-    public void appExit(Context context, Boolean isBackground) {
+    public void AppExit(Context context, Boolean isBackground) {
         try {
             finishAllActivity();
-            android.app.ActivityManager activityMgr = (android.app.ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+            ActivityManager activityMgr = (ActivityManager) context
+                    .getSystemService(Context.ACTIVITY_SERVICE);
             activityMgr.restartPackage(context.getPackageName());
         } catch (Exception e) {
 
@@ -177,7 +178,4 @@ public class ActivityManager {
         }
     }
 
-    public boolean isActivityStackEmpty(){
-        return activityStack.empty();
-    }
 }

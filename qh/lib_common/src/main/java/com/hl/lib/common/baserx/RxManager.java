@@ -30,7 +30,7 @@ public class RxManager {
      * @param consumer
      */
     public <T>void on(String eventName, Consumer<Object> consumer) {
-        Observable<T> mObservable = mRxBus.register(eventName);
+        Observable<T> mObservable = mRxBus.addSubscription(eventName,consumer);
         mObservables.put(eventName, mObservable);
         /*订阅管理*/
         mCompositeSubscription.add(mObservable.observeOn(AndroidSchedulers.mainThread())
@@ -56,7 +56,7 @@ public class RxManager {
     public void clear() {
         mCompositeSubscription.dispose();// 取消所有订阅
         for (Map.Entry<String, Observable<?>> entry : mObservables.entrySet()) {
-            mRxBus.unregister(entry.getKey(), entry.getValue());// 移除rxbus观察
+            mRxBus.unSubscribe(entry.getKey());// 移除rxbus观察
         }
     }
     //发送rxbus
