@@ -2,6 +2,6 @@
     package="com.hl.lib_news" >
 
     <application>
-        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.activity.MainActivity" />
     </application>
 </manifest>
