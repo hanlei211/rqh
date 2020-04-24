@@ -24,6 +24,10 @@ android {
             buildConfigField "boolean", 'IS_DEBUG', 'false'
         }
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 
 }
 

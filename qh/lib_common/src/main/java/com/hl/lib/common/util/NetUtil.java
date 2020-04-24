@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 
 import com.hl.lib.common.BaseApplication;
+import com.hl.lib.common.http.RxHttp;
 
 import static com.hl.lib.common.util.NetUtil.NetType.NET_4G;
 import static com.hl.lib.common.util.NetUtil.NetType.NO_NET;
@@ -29,7 +30,7 @@ public class NetUtil {
     public static boolean checkNetToast() {
         boolean isNet = checkNet();
         if (!isNet) {
-            ToastUtil.showToast("网络不给力哦！");
+            ToastUtil.showShort("网络不给力哦！");
         }
         return isNet;
     }
@@ -93,4 +94,19 @@ public class NetUtil {
         return NO_NET;
     }
     public enum NetType{WIFI,NET_4G,NO_NET};
+
+
+    /**
+     * 判断是否有网络
+     */
+    public static boolean isConnected() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) RxHttp.getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if (networkInfo != null) {
+                return networkInfo.isAvailable();
+            }
+        }
+        return false;
+    }
 }
