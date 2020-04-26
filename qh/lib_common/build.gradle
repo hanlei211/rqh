@@ -59,6 +59,7 @@ dependencies {
     api deps.support.constraint_layout
 
     api deps.arouter_api
+    annotationProcessor deps.arouter_compiler
 
     api deps.rxlifecycle
     api deps.rxlifecycle_android

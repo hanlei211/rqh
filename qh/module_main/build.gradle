@@ -22,6 +22,7 @@ android {
             }
         }
     }
+    resourcePrefix "news_"
 
     buildTypes {
         release {
@@ -29,6 +30,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 
     sourceSets {
         main {

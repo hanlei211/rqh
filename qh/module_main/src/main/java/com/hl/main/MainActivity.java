@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.hl.lib.common.base.BaseActivity;
 import com.hl.lib.common.provider.IAttentionProvider;
 import com.hl.lib.common.provider.IMeProvider;
@@ -42,6 +43,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initView() {
         BottomNavigationView navigationView = (BottomNavigationView)findViewById(R.id.navigation);
+//        addContent(new Fragment());
         //底部导航栏选择切换
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -53,7 +55,7 @@ public class MainActivity extends BaseActivity {
 
                     return true;
                 }else if (i == R.id.navigation_video) {
-                    switchContent(mCurrFragment, mVideoFragment, MainChannel.ATTENTION.name);
+                    switchContent(mCurrFragment, mVideoFragment, MainChannel.VIDEO.name);
                     mCurrFragment = mVideoFragment;
 
                     return true;
@@ -99,6 +101,15 @@ public class MainActivity extends BaseActivity {
         } else {
             transaction.hide(start).show(to).commit();
         }
+    }
+
+    public  void addContent(Fragment fragment){
+        if(fragment == null){
+            return;
+        }
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(0,fragment);
+        transaction.commit();
     }
 
     @Override
