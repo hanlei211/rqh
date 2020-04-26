@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.hl.lib.common.base.BaseActivity;
 import com.hl.lib.common.provider.IAttentionProvider;
 import com.hl.lib.common.provider.IMeProvider;
@@ -35,17 +34,17 @@ public class MainActivity extends BaseActivity {
     private Fragment mVideoFragment;
     private Fragment mMeFragment;
     private Fragment mCurrFragment;
+
     @Override
-    public int getLayoutId() {
+    public int onBindLayout() {
         return R.layout.activity_main;
     }
 
     @Override
     public void initView() {
-        BottomNavigationView navigationView = (BottomNavigationView)findViewById(R.id.navigation);
-//        addContent(new Fragment());
+        BottomNavigationView navigation = this.findViewById(R.id.bt_navigation);
         //底部导航栏选择切换
-        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int i = menuItem.getItemId();

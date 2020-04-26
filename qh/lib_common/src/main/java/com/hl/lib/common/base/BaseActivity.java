@@ -47,7 +47,7 @@ public abstract class BaseActivity extends RxAppCompatActivity  implements IView
     protected LoadingInitView mLoadingInitView;
     protected TextView mTxtTitle;
     protected Toolbar mToolbar;
-    private boolean isConfigChange=false;
+    private boolean isConfigChange = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,9 +59,9 @@ public abstract class BaseActivity extends RxAppCompatActivity  implements IView
         initCommonView();
         ButterKnife.bind(this);
         ARouter.getInstance().inject(this);
-        initData();
         initView();
         initListener();
+        initData();
         AppManager.getAppManager().addActivity(this);
     }
 
@@ -157,11 +157,11 @@ public abstract class BaseActivity extends RxAppCompatActivity  implements IView
             View view = mViewStubToolbar.inflate();
             initToolbar(view);
         }
-        mViewStubContent.setLayoutResource(getLayoutId());
+        mViewStubContent.setLayoutResource(onBindLayout());
         mViewStubContent.inflate();
     }
 
-    public abstract int getLayoutId();
+    public abstract int onBindLayout();
 
     private void initToolbar(View view) {
         mToolbar = view.findViewById(R.id.toolbar_root);

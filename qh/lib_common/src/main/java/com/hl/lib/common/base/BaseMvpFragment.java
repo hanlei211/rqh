@@ -33,7 +33,7 @@ public abstract class BaseMvpFragment<T extends BasePresenter,E extends BaseMode
         mRxManager=new RxManager();
         mRxlife = RxLife.create();
         mPresenter = TypeConvertUtil.getT(this,0);
-        mModel = TypeConvertUtil.getT(this,0);
+        mModel = TypeConvertUtil.getT(this,1);
         if(mPresenter !=null){
             mPresenter.mContext =this.getActivity();
         }

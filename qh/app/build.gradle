@@ -29,5 +29,6 @@ dependencies {
     implementation project(path: ':lib_api')
     if (!isModule.toBoolean()) {
         implementation project(':module_main')
+        implementation project(':module_news')
     }
 }

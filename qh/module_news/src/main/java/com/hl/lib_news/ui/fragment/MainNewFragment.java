@@ -3,6 +3,8 @@ package com.hl.lib_news.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -16,6 +18,9 @@ import com.hl.lib_news.ui.presenter.NewsMainPresenter;
 import java.util.List;
 
 public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMainModel> implements NewMainContract.View{
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
+
 
     public static MainNewFragment newInstance() {
         return new MainNewFragment();
@@ -46,7 +51,8 @@ public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMain
 
     @Override
     public void initView(View view) {
-
+      mViewPager = view.findViewById(R.id.pager_tour);
+      mTabLayout = view.findViewById(R.id.layout_tour);
     }
 
 

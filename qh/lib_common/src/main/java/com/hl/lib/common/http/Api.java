@@ -1,9 +1,6 @@
 package com.hl.lib.common.http;
 
-import android.annotation.SuppressLint;
 import android.app.Service;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 
 import com.hl.lib.common.http.manager.RetrofitManager;
 
