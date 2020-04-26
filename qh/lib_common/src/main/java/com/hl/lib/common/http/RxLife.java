@@ -13,7 +13,7 @@ public class RxLife {
         compositeDisposable = new CompositeDisposable();
     }
 
-    private static RxLife create(){
+    public static RxLife create(){
         return new RxLife();
     }
 

@@ -133,7 +133,7 @@ public class RetrofitManager {
         okHttpClient.addInterceptor(loggingInterceptor);
         //设置缓存
         okHttpClient.cache(createCache());
-        long timeout = RxHttp.getRequestSetting().getTimeOut();
+        long timeout = RxHttp.getRequestSetting().getTimeout();
         long connectTimeout = RxHttp.getRequestSetting().getConnectTimeout();
         long readTimeout = RxHttp.getRequestSetting().getReadTimeout();
         long writeTimeout = RxHttp.getRequestSetting().getWriteTimeout();

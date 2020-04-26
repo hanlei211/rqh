@@ -9,6 +9,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //添加 防止 butterknife 报错
+        javaCompileOptions {
+            // 显式声明支持注解
+            annotationProcessorOptions { includeCompileClasspath = true }
+        }
     }
     buildTypes {
         release {
@@ -21,6 +26,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':lib_common')
+    implementation project(path: ':lib_api')
     if (!isModule.toBoolean()) {
         implementation project(':module_main')
     }

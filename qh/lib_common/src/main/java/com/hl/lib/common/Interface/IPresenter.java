@@ -4,12 +4,6 @@ package com.hl.lib.common.Interface;
 public interface IPresenter<T extends IView> {
 
     /**
-     * 绑定view
-     * @param view
-     */
-  void attachView(T view);
-
-    /**
      * 解绑view
      */
   void detachView();

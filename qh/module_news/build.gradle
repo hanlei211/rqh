@@ -20,6 +20,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
+                includeCompileClasspath = true
             }
         }
 
@@ -53,4 +54,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     annotationProcessor deps.arouter_compiler
     api project(path: ':lib_common')
+    implementation project(path: ':lib_api')
 }

@@ -40,6 +40,8 @@ versions.nohttp_ok = "1.1.4"
 
 versions.butterknife = "7.0.1"
 
+versions.logger = "1.13"
+
 
 
 
@@ -102,6 +104,9 @@ deps.nohttp_ok = "com.yanzhenjie.nohttp:okhttp:$versions.nohttp_ok"
 
 // buttterknife
 deps.butterknife = "com.jakewharton:butterknife:$versions.butterknife"
+
+//log
+deps.logger  = "com.orhanobut:logger:$versions.logger"
 
 
 

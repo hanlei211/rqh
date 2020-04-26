@@ -17,7 +17,7 @@ import com.hl.main.entity.MainChannel;
 
 public class MainActivity extends BaseActivity {
 
-    @Autowired(name = "/news/main")
+    @Autowired(name = "/new/main")
     INewsProvider mNewsProvider;
 
     @Autowired(name = "/find/main")

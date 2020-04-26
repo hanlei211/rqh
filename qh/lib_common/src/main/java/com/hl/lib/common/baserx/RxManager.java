@@ -1,12 +1,11 @@
 package com.hl.lib.common.baserx;
 
 
-import org.reactivestreams.Subscription;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
 
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -30,7 +29,7 @@ public class RxManager {
      * @param consumer
      */
     public <T>void on(String eventName, Consumer<Object> consumer) {
-        Observable<T> mObservable = mRxBus.addSubscription(eventName,consumer);
+        Observable<T> mObservable = (Observable<T>) mRxBus.addSubscription(eventName,consumer);
         mObservables.put(eventName, mObservable);
         /*订阅管理*/
         mCompositeSubscription.add(mObservable.observeOn(AndroidSchedulers.mainThread())

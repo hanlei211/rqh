@@ -2,6 +2,7 @@ package com.hl.lib.common.baserx;
 
 
 import java.util.HashMap;
+import java.util.Observable;
 
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
@@ -84,7 +85,7 @@ public class RxBus {
      * @param o
      * @param disposable
      */
-    public void addSubscription(Object o, Consumer<Object> disposable) {
+    public Disposable addSubscription(Object o, Consumer<Object> disposable) {
         if (mSubscriptionMap == null) {
             mSubscriptionMap = new HashMap<>();
         }
@@ -97,6 +98,7 @@ public class RxBus {
             disposables.add((Disposable) disposable);
             mSubscriptionMap.put(key, disposables);
         }
+        return (Disposable) disposable;
     }
 
     /**

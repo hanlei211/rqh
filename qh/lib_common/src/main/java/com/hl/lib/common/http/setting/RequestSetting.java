@@ -51,7 +51,7 @@ public interface RequestSetting {
      * 获取默认超时时长，单位为毫秒数
      */
     @IntRange(from = 1)
-    long getTimeOut();
+    long getTimeout();
 
     /**
      * 获取Connect超时时长，单位为毫秒数
