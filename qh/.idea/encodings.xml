@@ -2,7 +2,7 @@
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/lib_common/src/main/java/com/hl/lib/common/http/request/BaseRequest.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/lib_common/src/main/java/com/hl/lib/common/mvp/BaseRefreshView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/lib_common/src/main/java/com/hl/lib/common/mvp/BaseRefreshView.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lib_common/src/main/java/com/hl/lib/common/mvp/BaseView.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/lib_common/src/main/java/com/hl/lib/common/refresh/DaisyFooterView.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/lib_common/src/main/java/com/hl/lib/common/refresh/DaisyHeaderView.java" charset="GBK" />

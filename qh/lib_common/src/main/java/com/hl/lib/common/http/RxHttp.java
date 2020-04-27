@@ -18,7 +18,7 @@ public class RxHttp {
     private final Context mAppContext;
     private RequestSetting mRequestSetting = null;
 
-    public RxHttp  getInstance(){
+    public static RxHttp  getInstance(){
         if(instance == null) {
            throw  new RxHttpUninitializedException();
         }
@@ -35,15 +35,15 @@ public class RxHttp {
 
     @NonNull
     public static Context getAppContext(){
-        return instance.getInstance().mAppContext;
+        return getInstance().mAppContext;
     }
 
     public  static void initRequest(RequestSetting setting){
-        instance.getInstance().mRequestSetting = setting;
+        getInstance().mRequestSetting = setting;
     }
 
     public static RequestSetting  getRequestSetting(){
-        RequestSetting setting = instance.getInstance().mRequestSetting;
+        RequestSetting setting = getInstance().mRequestSetting;
         if(setting == null){
            throw new NullRequestSettingException();
         }

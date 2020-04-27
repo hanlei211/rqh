@@ -1,12 +1,13 @@
 package com.hl.lib.common.http.manager;
 
-import android.app.Application;
-import android.content.Context;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.hl.lib.common.http.RxHttp;
 import com.hl.lib.common.http.interceptor.BaseUrlRedirectInterceptor;
+import com.hl.lib.common.http.interceptor.CacheControlInterceptor;
+import com.hl.lib.common.http.interceptor.PublicHeadersInterceptor;
+import com.hl.lib.common.http.interceptor.PublicQueryParameterInterceptor;
 
 import java.io.File;
 import java.util.Iterator;
@@ -24,16 +25,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitManager {
     public static RetrofitManager retrofitManager;
     private Map<Class<?>, Retrofit> mRetrofitMap = null;
-    public static Context mContext;
     private final Retrofit mRetrofit;
 
     public RetrofitManager() {
         this.mRetrofit = create();
     }
 
-    public static void init(Application application) {
-        mContext = application;
-    }
 
     public static RetrofitManager getInstance() {
         if (retrofitManager == null) {
@@ -54,8 +51,8 @@ public class RetrofitManager {
      * @param <T>
      * @return
      */
-    public static <T> T getService(Class<?> clazz) {
-     return (T) getInstance().getRetrofit(clazz).create(clazz);
+    public static <T> T getService(Class<T> clazz) {
+        return getInstance().getRetrofit(clazz).create(clazz);
     }
 
     public Retrofit getRetrofit(Class<?> clazz) {
@@ -142,9 +139,9 @@ public class RetrofitManager {
         okHttpClient.writeTimeout(writeTimeout > 0 ? writeTimeout : timeout, TimeUnit.MILLISECONDS);
         // 设置应用层拦截器
         BaseUrlRedirectInterceptor.addTo(okHttpClient);
-//        PublicHeadersInterceptor.addTo(okHttpClient);
-//        PublicQueryParameterInterceptor.addTo(okHttpClient);
-//        CacheControlInterceptor.addTo(okHttpClient);
+        PublicHeadersInterceptor.addTo(okHttpClient);
+        PublicQueryParameterInterceptor.addTo(okHttpClient);
+        CacheControlInterceptor.addTo(okHttpClient);
         Interceptor[] interceptors = RxHttp.getRequestSetting().getInterceptors();
         if (interceptors != null && interceptors.length > 0) {
             for (Interceptor interceptor : interceptors) {

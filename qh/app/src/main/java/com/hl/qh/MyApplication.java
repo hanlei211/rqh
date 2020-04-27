@@ -6,12 +6,21 @@ import android.support.annotation.Nullable;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.lib_api.config.ApiConfig;
 import com.hl.lib.common.BaseApplication;
+import com.hl.lib.common.baseapp.AppConfig;
 import com.hl.lib.common.http.RxHttp;
 import com.hl.lib.common.http.setting.DefaultRequestSetting;
 import com.hl.lib.common.util.LogUtils;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.LogAdapter;
 import com.orhanobut.logger.Logger;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
+
+import okhttp3.OkHttpClient;
 
 /**
  * Description: <MyApplication><br>
@@ -37,8 +46,34 @@ public class MyApplication extends BaseApplication {
             }
 
             @Override
+            public Map<String, String> getRedirectBaseUrl() {
+                Map<String, String> urls = new HashMap<>(2);
+                urls.put(ApiConfig.BASE_URL_HTTPS_NAME, ApiConfig.BASE_URL_HTTPS);
+                return urls;
+            }
+
+            @Override
             public int getSuccessCode() {
                 return ApiConfig.SUCCESS_CODE;
+            }
+
+
+            @Override
+            public Map<String, String> getStaticPublicQueryParameter() {
+                Map<String, String> parameters = new HashMap<>(2);
+                parameters.put("system", "android");
+                parameters.put("version_code", "1");
+                return parameters;
+            }
+
+            @Override
+            public void setOkHttpClient(OkHttpClient.Builder builder) {
+                builder.hostnameVerifier(new HostnameVerifier() {
+                    @Override
+                    public boolean verify(String hostname, SSLSession session) {
+                        return true;
+                    }
+                });
             }
         });
     }

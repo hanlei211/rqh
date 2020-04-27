@@ -1,56 +1,70 @@
 package com.hl.lib.common.base;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import com.hl.lib.common.baseapp.AppManager;
 import com.hl.lib.common.baserx.RxManager;
 import com.hl.lib.common.http.RxLife;
 import com.hl.lib.common.mvp.BaseRefreshPresenter;
 import com.hl.lib.common.refresh.BaseRefreshLayout;
 import com.hl.lib.common.refresh.DaisyRefreshLayout;
+import com.hl.lib.common.util.TypeConvertUtil;
 
-public abstract class BaseRefreshMvpActivity<T extends BaseRefreshPresenter, E extends BaseModel> extends BaseActivity {
+import butterknife.ButterKnife;
+
+public abstract class BaseRefreshMvpFragment<T extends BaseRefreshPresenter,E extends BaseModel> extends BaseFragment{
     protected DaisyRefreshLayout mRefreshLayout;
     public T mPresenter;
     public E mModel;
-    public Context mContext;
     public RxManager mRxManager;
     public RxLife mRxLife;
-    private boolean isConfigChange = false;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         mRxManager=new RxManager();
         mRxLife = RxLife.create();
+        mPresenter = TypeConvertUtil.getT(this,0);
+        mModel = TypeConvertUtil.getT(this,1);
+        if(mPresenter !=null){
+            mPresenter.mContext =this.getActivity();
+        }
         initPresenter();
+        return mView;
     }
 
     @Override
-    public void initCommonView() {
-        super.initCommonView();
-        initRefreshView();
+    public void initCommonView(View view) {
+        super.initCommonView(view);
+        initRefreshView(view);
     }
 
-    public void initRefreshView() {
-        mRefreshLayout = findViewById(onBindRreshLayout());
-        // 下拉刷新
+    protected abstract int onBindRreshLayout();
+
+    public void initRefreshView(View view) {
+        mRefreshLayout = view.findViewById(onBindRreshLayout());
         mRefreshLayout.setOnRefreshListener(new BaseRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 onRefreshEvent();
             }
         });
-        // 上拉加载
         mRefreshLayout.setOnLoadMoreListener(new BaseRefreshLayout.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 onLoadMoreEvent();
             }
         });
-        // 自动加载
         mRefreshLayout.setOnAutoLoadListener(new BaseRefreshLayout.OnAutoLoadListener() {
             @Override
             public void onAutoLoad() {
@@ -65,7 +79,6 @@ public abstract class BaseRefreshMvpActivity<T extends BaseRefreshPresenter, E e
 
     protected abstract void onRefreshEvent();
 
-    protected abstract int onBindRreshLayout();
 
     public void enableRefresh(boolean b) {
         mRefreshLayout.setEnableRefresh(b);
@@ -83,42 +96,27 @@ public abstract class BaseRefreshMvpActivity<T extends BaseRefreshPresenter, E e
         mRefreshLayout.setLoadMore(false);
     }
 
-    @Override
-    public void initView() {
-
-    }
-
-    @Override
-    public void initData() {
-
-    }
-
     //简单页面无需mvp就不用管此方法即可,完美兼容各种实际场景的变通
     public abstract void initPresenter();
 
-    @Override
-    public void showNetErrView() {
-
+    public void autoLoadData() {
+        if(mRefreshLayout != null){
+            mRefreshLayout.autoRefresh();
+        }
     }
 
     @Override
-    public void hideNetErrView() {
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
         if(mRxManager != null){
             mRxManager.clear();
         }
-        if(mRxLife !=null){
+        if(mRxLife != null){
             mRxLife.destroy();
         }
-        if (mPresenter != null)
-            mPresenter.onDestroy();
-        if(!isConfigChange){
-            AppManager.getAppManager().finishActivity(this);
+        if(mPresenter != null){
+            mPresenter= null;
         }
     }
 }

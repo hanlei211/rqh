@@ -14,9 +14,10 @@ public class Api {
      * @param <T>   ServiceInterface的名字
      * @return 接口实例
      */
-    public static <T> T api(Class<?> clazz) {
+    protected static <T> T api(Class<T> clazz) {
         return RetrofitManager.getService(clazz);
     }
+
 
     public interface  Header{
 

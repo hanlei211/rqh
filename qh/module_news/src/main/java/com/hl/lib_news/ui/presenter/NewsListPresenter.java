@@ -8,41 +8,47 @@ import com.hl.lib.common.http.listener.RequestListener;
 import com.hl.lib.common.http.request.RxRequest;
 import com.hl.lib.common.util.LogUtils;
 import com.hl.lib_news.api.NewsApi;
-import com.hl.lib_news.ui.contract.NewMainContract;
+import com.hl.lib_news.ui.bean.NewsDetail;
+import com.hl.lib_news.ui.contract.NewsListContract;
 
 import java.util.List;
 
-public class NewsMainPresenter extends NewMainContract.Presenter {
+public class NewsListPresenter extends NewsListContract.Presenter {
 
     @Override
-    public void getListNewsType(RxLife mRxLife) {
-        mRxLife.add(RxRequest.create(NewsApi.api().getNewsChannelType(AppConfig.APP_KEY)).listener(new RequestListener() {
+    public void getNewsListData(RxLife mRxLife,String newsType) {
+        mRxLife.add(RxRequest.create(NewsApi.api().getNewsListData(AppConfig.APP_KEY)).listener(new RequestListener() {
             private long timeStart = 0;
             @Override
             public void onStart() {
                 timeStart = System.currentTimeMillis();
+                LogUtils.logd(timeStart+"");
+
             }
 
             @Override
             public void onError(ExceptionHandle exception) {
-                LogUtils.logd("onError(" + exception.getMsg() + ")");
                 mView.showNoDataView();
             }
 
             @Override
             public void onFinish() {
                 long cast = System.currentTimeMillis() - timeStart;
+                LogUtils.logd(cast+"");
             }
-        }).request(new ResultCallback<List<String>>() {
+        }).request(new ResultCallback<List<NewsDetail>>() {
             @Override
-            public void onSuccess(int code, List<String> data) {
-                mView.showChannelType(data);
-                mView.initTabLayout();
+            public void onSuccess(int code, List<NewsDetail> data) {
+                mView.showNewsListData(data);
             }
 
             @Override
             public void onFailed(int code, String msg) {
             }
         }));
+    }
+
+    public void refreshData(){
+
     }
 }

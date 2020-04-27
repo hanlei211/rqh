@@ -21,10 +21,10 @@ import io.reactivex.schedulers.Schedulers;
 
 public class RxRequest<T, R extends BaseReponse<T>> {
 
-    private Observable<R> mObserVable;
+    private final  Observable<R> mObserVable;
     private ResultCallback<T> mCallBack = null;
     private RequestListener mListener = null;
-    private RxLife mRxLife;
+    private RxLife mRxLife = null;
 
 
     public RxRequest(Observable<R> obserVable) {

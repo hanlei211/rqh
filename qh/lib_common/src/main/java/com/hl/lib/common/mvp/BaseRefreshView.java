@@ -6,9 +6,9 @@ import java.util.List;
  * Description: <BaseRefreshView><br>
  */
 public interface BaseRefreshView<T> extends BaseRefreshContract.View {
-    //刷新数据
+    //鍒锋柊鏁版嵁
     void refreshData(List<T> data);
-    //加载更多
+    //鍔犺浇鏇村
     void loadMoreData(List<T> data);
 
 }
