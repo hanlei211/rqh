@@ -24,7 +24,7 @@ public class RxLife {
         compositeDisposable.add(disposable);
     }
 
-    public void destroy(Disposable disposable){
+    public void destroy(){
         if (compositeDisposable == null || compositeDisposable.isDisposed()) {
             return;
         }

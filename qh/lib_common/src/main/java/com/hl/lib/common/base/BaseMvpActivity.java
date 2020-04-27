@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 
 import com.hl.lib.common.baseapp.AppManager;
 import com.hl.lib.common.baserx.RxManager;
+import com.hl.lib.common.http.RxLife;
 import com.hl.lib.common.mvp.BaseModel;
 import com.hl.lib.common.mvp.BasePresenter;
 
@@ -14,13 +15,16 @@ public abstract  class BaseMvpActivity<T extends BasePresenter, E extends BaseMo
     public T mPresenter;
     public E mModel;
     public Context mContext;
-    public RxManager mRxManager;
     private boolean isConfigChange=false;
+    public RxManager mRxManager;
+    public RxLife mRxLife;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mRxManager=new RxManager();
+        mRxLife = RxLife.create();
         initPresenter();
     }
 
@@ -30,8 +34,11 @@ public abstract  class BaseMvpActivity<T extends BasePresenter, E extends BaseMo
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mPresenter != null)
-            mPresenter.onDestroy();
+        if (mRxManager != null)
+            mRxManager.clear();
+        if(mRxLife != null){
+            mRxLife.destroy();
+        }
         if(!isConfigChange){
             AppManager.getAppManager().finishActivity(this);
         }

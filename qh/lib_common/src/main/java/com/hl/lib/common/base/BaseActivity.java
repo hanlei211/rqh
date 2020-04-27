@@ -18,10 +18,12 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.hl.lib.common.Interface.IView;
 import com.hl.lib.common.R;
 import com.hl.lib.common.baseapp.AppManager;
+import com.hl.lib.common.baserx.RxManager;
 import com.hl.lib.common.commonwidget.LoadingDialog;
 import com.hl.lib.common.commonwidget.StatusBarCompat;
 import com.hl.lib.common.daynightmodeutils.ChangeModeController;
 import com.hl.lib.common.event.common.BaseActivityEvent;
+import com.hl.lib.common.http.RxLife;
 import com.hl.lib.common.util.NetUtil;
 import com.hl.lib.common.util.ToastUtil;
 import com.hl.lib.common.view.LoadingInitView;
@@ -148,7 +150,7 @@ public abstract class BaseActivity extends RxAppCompatActivity  implements IView
         startActivity(intent);
     }
 
-    private void initCommonView() {
+    public void initCommonView() {
         mViewStubToolbar = findViewById(R.id.view_stub_toolbar);
         mViewStubContent = findViewById(R.id.view_stub_content);
         mViewStubInitLoading = findViewById(R.id.view_stub_init_loading);

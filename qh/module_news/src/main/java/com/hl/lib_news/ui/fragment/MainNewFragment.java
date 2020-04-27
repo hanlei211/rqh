@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.hl.lib.common.base.BaseMvpFragment;
 import com.hl.lib_news.R;
-import com.hl.lib_news.ui.bean.WeatherBean;
 import com.hl.lib_news.ui.contract.NewMainContract;
 import com.hl.lib_news.ui.model.NewsMainModel;
 import com.hl.lib_news.ui.presenter.NewsMainPresenter;
@@ -49,7 +48,7 @@ public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMain
     @Override
     public void initData() {
         mPresenter.setVM(this, mModel);
-        mPresenter.lodeMineChannelsRequest(mRxlife);
+        mPresenter.getListNewsType(mRxLife);
     }
 
     @Override
@@ -59,8 +58,7 @@ public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMain
     }
 
     @Override
-    public void returnNewsChannelData(List<WeatherBean> model) {
-
+    public void showChannelType(List<String> model) {
     }
 
     @Override

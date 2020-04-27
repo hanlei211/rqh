@@ -19,7 +19,7 @@ public abstract class BaseMvpFragment<T extends BasePresenter,E extends BaseMode
     public T mPresenter;
     public E mModel;
     public RxManager mRxManager;
-    public RxLife mRxlife;
+    public RxLife mRxLife;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public abstract class BaseMvpFragment<T extends BasePresenter,E extends BaseMode
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         mRxManager=new RxManager();
-        mRxlife = RxLife.create();
+        mRxLife = RxLife.create();
         mPresenter = TypeConvertUtil.getT(this,0);
         mModel = TypeConvertUtil.getT(this,1);
         if(mPresenter !=null){
@@ -48,10 +48,14 @@ public abstract class BaseMvpFragment<T extends BasePresenter,E extends BaseMode
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+        if(mRxManager != null){
+            mRxManager.clear();
+        }
+        if(mRxLife != null){
+            mRxLife.destroy();
+        }
         if(mPresenter != null){
-            mPresenter.onDestroy();
             mPresenter= null;
         }
-      mRxManager.clear();
     }
 }
