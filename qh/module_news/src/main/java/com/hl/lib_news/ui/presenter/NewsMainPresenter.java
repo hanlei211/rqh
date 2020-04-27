@@ -1,7 +1,9 @@
 package com.hl.lib_news.ui.presenter;
 
 import com.hl.lib.common.http.RxLife;
+import com.hl.lib.common.http.callback.ResultCallback;
 import com.hl.lib.common.http.exception.ExceptionHandle;
+import com.hl.lib.common.http.listener.RequestListener;
 import com.hl.lib.common.http.request.RxRequest;
 import com.hl.lib.common.util.LogUtils;
 import com.hl.lib_news.api.NewsApi;
@@ -10,13 +12,11 @@ import com.hl.lib_news.ui.contract.NewMainContract;
 
 import java.util.List;
 
-import okhttp3.logging.HttpLoggingInterceptor;
-
 public class NewsMainPresenter extends NewMainContract.Presenter {
 
 
     public void lodeMineChannelsRequest(RxLife mRxLife) {
-        mRxLife.add(RxRequest.create(NewsApi.api().weather("天津")).listener(new RxRequest.RequestListener() {
+        mRxLife.add(RxRequest.create(NewsApi.api().weather("天津")).listener(new RequestListener() {
             private long timeStart = 0;
             @Override
             public void onStart() {
@@ -35,7 +35,7 @@ public class NewsMainPresenter extends NewMainContract.Presenter {
                 long cast = System.currentTimeMillis() - timeStart;
                 LogUtils.logd(cast+"");
             }
-        }).request(new RxRequest.ResultCallback<List<WeatherBean>>() {
+        }).request(new ResultCallback<List<WeatherBean>>() {
             @Override
             public void onSuccess(int code, List<WeatherBean> data) {
                 LogUtils.logd("code:"+code);

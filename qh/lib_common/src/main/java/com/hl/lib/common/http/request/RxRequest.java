@@ -5,8 +5,10 @@ import android.support.annotation.NonNull;
 
 import com.hl.lib.common.http.RxHttp;
 import com.hl.lib.common.http.RxLife;
+import com.hl.lib.common.http.callback.ResultCallback;
 import com.hl.lib.common.http.exception.ApiException;
 import com.hl.lib.common.http.exception.ExceptionHandle;
+import com.hl.lib.common.http.listener.RequestListener;
 import com.hl.lib.common.http.reponse.BaseReponse;
 
 import io.reactivex.Observable;
@@ -95,20 +97,6 @@ public class RxRequest<T, R extends BaseReponse<T>> {
             mRxLife.add(disposable);
         }
         return disposable;
-    }
-
-    public interface ResultCallback<E> {
-        void onSuccess(int code, E data);
-
-        void onFailed(int code, String msg);
-    }
-
-    public interface RequestListener {
-        void onStart();
-
-        void onError(ExceptionHandle exception);
-
-        void onFinish();
     }
 
 
