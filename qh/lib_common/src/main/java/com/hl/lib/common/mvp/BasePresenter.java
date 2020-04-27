@@ -6,7 +6,7 @@ import com.hl.lib.common.baserx.RxManager;
 
 
 
-public abstract class BasePresenter<M ,V>{
+public abstract class BasePresenter<M ,V extends BaseView>{
 
     public M mModel;
     public V mView;

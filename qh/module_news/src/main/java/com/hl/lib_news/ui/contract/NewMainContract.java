@@ -16,7 +16,7 @@ public interface NewMainContract {
     interface View extends BaseView {
        void  returnNewsChannelData(List<WeatherBean> weatherBeans);
     }
-    abstract static class Presenter extends BasePresenter<View, Model> {
+    abstract static class Presenter extends BasePresenter<Model, View> {
         public abstract void getListNewsType();
     }
 }

@@ -74,7 +74,6 @@ public abstract class BaseFragment extends Fragment implements IView {
     public void initCommonView(View view) {
         mViewStubToolbar = view.findViewById(R.id.view_stub_toolbar);
         mViewStubContent = view.findViewById(R.id.view_stub_content);
-        mViewStubContent = view.findViewById(R.id.view_stub_content);
         mViewStubInitLoading = view.findViewById(R.id.view_stub_init_loading);
 //        mViewStubTransLoading = view.findViewById(R.id.view_stub_trans_loading);
         mViewStubNoData = view.findViewById(R.id.view_stub_nodata);

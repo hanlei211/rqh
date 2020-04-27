@@ -102,15 +102,6 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    public  void addContent(Fragment fragment){
-        if(fragment == null){
-            return;
-        }
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(0,fragment);
-        transaction.commit();
-    }
-
     @Override
     public boolean enableToolbar() {
         return false;

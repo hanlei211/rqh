@@ -26,7 +26,7 @@ public class NewsMainPresenter extends NewMainContract.Presenter {
 
             @Override
             public void onError(ExceptionHandle exception) {
-
+                mView.showNoDataView();
             }
 
             @Override
@@ -39,13 +39,12 @@ public class NewsMainPresenter extends NewMainContract.Presenter {
             public void onSuccess(int code, List<WeatherBean> data) {
                 HttpLoggingInterceptor.Logger.DEFAULT.log(code+"");
                 HttpLoggingInterceptor.Logger.DEFAULT.log(data+"");
-                mModel.returnNewsChannelData(data);
+                mView.returnNewsChannelData(data);
             }
 
             @Override
             public void onFailed(int code, String msg) {
-                HttpLoggingInterceptor.Logger.DEFAULT.log(code+"");
-                HttpLoggingInterceptor.Logger.DEFAULT.log(msg+"");
+                mView.showNetErrView();
             }
         }));
     }

@@ -30,7 +30,7 @@ public class RxRequest<T, R extends BaseReponse<T>> {
     }
 
     public static <T, R extends BaseReponse<T>> RxRequest<T, R> create(@NonNull Observable observable) {
-        return new RxRequest<T, R>(observable);
+        return new RxRequest<>(observable);
     }
 
     /**
@@ -50,11 +50,11 @@ public class RxRequest<T, R extends BaseReponse<T>> {
         mCallBack = callback;
         Disposable disposable = mObserVable.subscribe(new Consumer<BaseReponse<T>>() {
             @Override
-            public void accept(BaseReponse<T> reponse) throws Exception {
-                if (!isSuccess(reponse.getCode())) {
-                    throw new ApiException(reponse.getCode(), reponse.getMsg());
+            public void accept(BaseReponse<T> response) throws Exception {
+                if (!isSuccess(response.getCode())) {
+                    throw new ApiException(response.getCode(), response.getMsg());
                 }
-                mCallBack.onSuccess(reponse.getCode(), reponse.getData());
+                mCallBack.onSuccess(response.getCode(), response.getData());
             }
         }, new Consumer<Throwable>() {
             @Override

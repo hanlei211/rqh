@@ -7,7 +7,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.hl.lib.common.base.BaseMvpFragment;
 import com.hl.lib_news.R;
 import com.hl.lib_news.ui.bean.WeatherBean;
@@ -30,7 +29,11 @@ public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMain
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ARouter.getInstance().inject(this);
+    }
+
+    @Override
+    public void initPresenter() {
+
     }
 
     @Override
@@ -45,7 +48,7 @@ public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMain
 
     @Override
     public void initData() {
-        mPresenter.setVM(mModel, this);
+        mPresenter.setVM(this, mModel);
         mPresenter.lodeMineChannelsRequest(mRxlife);
     }
 
@@ -55,24 +58,8 @@ public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMain
       mTabLayout = view.findViewById(R.id.layout_tour);
     }
 
-
     @Override
-    public void initPresenter() {
-
-    }
-
-    @Override
-    public void finishActivity() {
-
-    }
-
-    @Override
-    public void showInitLoadView() {
-
-    }
-
-    @Override
-    public void hideInitLoadView() {
+    public void returnNewsChannelData(List<WeatherBean> model) {
 
     }
 
@@ -83,21 +70,6 @@ public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMain
 
     @Override
     public void hideNetErrView() {
-
-    }
-
-    @Override
-    public void showNoDataView() {
-
-    }
-
-    @Override
-    public void hideNoDataView() {
-
-    }
-
-    @Override
-    public void returnNewsChannelData(List<WeatherBean> model) {
 
     }
 }
