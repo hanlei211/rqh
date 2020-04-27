@@ -1,9 +1,6 @@
 package com.hl.lib.common.util;
 
 
-import android.support.annotation.Nullable;
-
-import com.hl.lib.common.baseapp.AppConfig;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
@@ -22,16 +19,8 @@ public class LogUtils {
         DEBUG_ENABLE=debug;
         FormatStrategy  strategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(false)
-                .methodCount(3)
-                .methodOffset(2)
-                .tag("hl_logger")
                 .build();
         Logger.addLogAdapter(new AndroidLogAdapter(strategy));
-        Logger.addLogAdapter(new AndroidLogAdapter(){
-            @Override public boolean isLoggable(int priority, @Nullable String tag) {
-                return DEBUG_ENABLE;
-            }
-        });
     }
     public static void logd(String tag, String message) {
         if (DEBUG_ENABLE) {

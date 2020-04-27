@@ -55,4 +55,5 @@ dependencies {
     annotationProcessor deps.arouter_compiler
     api project(path: ':lib_common')
     implementation project(path: ':lib_api')
+    implementation project(path: ':lib_irecyclerview')
 }

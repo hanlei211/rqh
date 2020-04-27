@@ -41,7 +41,6 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-
     api deps.junit
     api deps.testrunner
     api deps.testespresso
@@ -72,6 +71,8 @@ dependencies {
     api deps.adapter_rxjava2
     api deps.rxjava2
     api deps.rxandroid
+
+    api deps.glide
 
     api deps.butterknife
     api deps.logger

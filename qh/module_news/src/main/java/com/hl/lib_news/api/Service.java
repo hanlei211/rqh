@@ -2,6 +2,7 @@ package com.hl.lib_news.api;
 
 import com.example.lib_api.bean.ResponseBean;
 import com.hl.lib_news.ui.bean.NewsDetail;
+import com.hl.lib_news.ui.model.NewsListResult;
 
 import java.util.List;
 
@@ -20,5 +21,5 @@ public interface Service {
      * 获取新闻列表
      */
     @GET("news/get?")
-    Observable<ResponseBean<List<NewsDetail>>> getNewsListData(@Query("appkey") String appkey);
+    Observable<ResponseBean<NewsListResult>> getNewsListData(@Query("appkey") String appkey);
 }

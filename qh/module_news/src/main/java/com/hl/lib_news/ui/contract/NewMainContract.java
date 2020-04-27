@@ -17,6 +17,6 @@ public interface NewMainContract {
         void initTabLayout();
     }
     abstract static class Presenter extends BasePresenter<Model, View> {
-        public abstract void getListNewsType(RxLife mRxLife);
+        public abstract void getListNewsType();
     }
 }

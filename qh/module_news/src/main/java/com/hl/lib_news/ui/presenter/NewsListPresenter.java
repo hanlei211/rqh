@@ -10,24 +10,24 @@ import com.hl.lib.common.util.LogUtils;
 import com.hl.lib_news.api.NewsApi;
 import com.hl.lib_news.ui.bean.NewsDetail;
 import com.hl.lib_news.ui.contract.NewsListContract;
+import com.hl.lib_news.ui.model.NewsListResult;
 
 import java.util.List;
 
 public class NewsListPresenter extends NewsListContract.Presenter {
 
     @Override
-    public void getNewsListData(RxLife mRxLife,String newsType) {
-        mRxLife.add(RxRequest.create(NewsApi.api().getNewsListData(AppConfig.APP_KEY)).listener(new RequestListener() {
+    public void getNewsListData(String newsType) {
+        RxRequest.create(NewsApi.api().getNewsListData(AppConfig.APP_KEY)).listener(new RequestListener() {
             private long timeStart = 0;
             @Override
             public void onStart() {
                 timeStart = System.currentTimeMillis();
-                LogUtils.logd(timeStart+"");
-
             }
 
             @Override
             public void onError(ExceptionHandle exception) {
+                LogUtils.logd("exception"+exception.getMsg());
                 mView.showNoDataView();
             }
 
@@ -36,16 +36,16 @@ public class NewsListPresenter extends NewsListContract.Presenter {
                 long cast = System.currentTimeMillis() - timeStart;
                 LogUtils.logd(cast+"");
             }
-        }).request(new ResultCallback<List<NewsDetail>>() {
+        }).request(new ResultCallback<NewsListResult>() {
             @Override
-            public void onSuccess(int code, List<NewsDetail> data) {
-                mView.showNewsListData(data);
+            public void onSuccess(int code, NewsListResult data) {
+                mView.showNewsListData(data.list);
             }
 
             @Override
             public void onFailed(int code, String msg) {
             }
-        }));
+        });
     }
 
     public void refreshData(){

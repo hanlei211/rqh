@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import com.hl.lib.common.baseapp.AppManager;
 import com.hl.lib.common.baserx.RxManager;
 import com.hl.lib.common.http.RxLife;
-import com.hl.lib.common.mvp.BaseModel;
 import com.hl.lib.common.mvp.BasePresenter;
 
 public abstract  class BaseMvpActivity<T extends BasePresenter, E extends BaseModel> extends BaseActivity {

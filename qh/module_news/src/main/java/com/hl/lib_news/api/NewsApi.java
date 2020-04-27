@@ -6,7 +6,7 @@ import com.hl.lib.common.http.Api;
 public class NewsApi extends Api {
 
    public static Service api(){
-     return (Service) Api.api(Service.class);
+     return  Api.api(Service.class);
    }
 
 }

@@ -52,7 +52,7 @@ public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMain
     @Override
     public void initData() {
         mPresenter.setVM(this, mModel);
-        mPresenter.getListNewsType(mRxLife);
+        mPresenter.getListNewsType();
     }
 
     @Override
@@ -93,6 +93,7 @@ public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMain
 
             }
         });
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
 

@@ -2,10 +2,13 @@ package com.hl.lib_news.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.hl.lib.common.base.BaseRefreshMvpFragment;
 import com.hl.lib_news.R;
+import com.hl.lib_news.ui.adapter.NewsListAdapter;
 import com.hl.lib_news.ui.bean.NewsDetail;
 import com.hl.lib_news.ui.contract.NewsListContract;
 import com.hl.lib_news.ui.model.NewsListModel;
@@ -15,13 +18,15 @@ import java.util.List;
 
 public class NewsListFragment  extends BaseRefreshMvpFragment<NewsListPresenter, NewsListModel> implements NewsListContract.View{
     public String  newsType;
+    public RecyclerView mRecylerView;
+    public NewsListAdapter newsListAdapter;
 
     public static NewsListFragment newInstance(String newsType) {
         NewsListFragment newsListFragment = new NewsListFragment();
         Bundle args = new Bundle();
         args.putString("newsType",newsType);
         newsListFragment.setArguments(args);
-        return new NewsListFragment();
+        return newsListFragment;
     }
 
     @Override
@@ -32,7 +37,7 @@ public class NewsListFragment  extends BaseRefreshMvpFragment<NewsListPresenter,
 
     @Override
     protected int onBindRreshLayout() {
-        return R.layout.fragment_news_list;
+        return R.id.refview_news_list;
     }
 
 
@@ -43,18 +48,18 @@ public class NewsListFragment  extends BaseRefreshMvpFragment<NewsListPresenter,
 
     @Override
     public int onBindLayout() {
-        return 0;
+        return R.layout.fragment_news_list;
     }
-
     @Override
     public void initData() {
-        mPresenter.setVM(this, (NewsListContract.Model) mModel);
-        mPresenter.getNewsListData(mRxLife,newsType);
+        mPresenter.setVM(this, mModel);
+        mPresenter.getNewsListData(newsType);
     }
 
     @Override
     public void initView(View view) {
-
+        mRecylerView = view.findViewById(R.id.recview_news_list);
+        mRecylerView.setLayoutManager(new LinearLayoutManager(mActivity));
     }
 
     @Override
@@ -74,7 +79,8 @@ public class NewsListFragment  extends BaseRefreshMvpFragment<NewsListPresenter,
 
     @Override
     public void showNewsListData(List<NewsDetail> newsDetails) {
-
+         newsListAdapter = new NewsListAdapter(getContext(),newsDetails);
+         mRecylerView.setAdapter(newsListAdapter);
     }
 
     @Override

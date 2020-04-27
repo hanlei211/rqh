@@ -12,6 +12,7 @@ import com.hl.lib.common.http.listener.RequestListener;
 import com.hl.lib.common.http.reponse.BaseReponse;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
@@ -21,7 +22,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class RxRequest<T, R extends BaseReponse<T>> {
 
-    private final  Observable<R> mObserVable;
+    private final Observable<R> mObserVable;
     private ResultCallback<T> mCallBack = null;
     private RequestListener mListener = null;
     private RxLife mRxLife = null;
@@ -48,19 +49,26 @@ public class RxRequest<T, R extends BaseReponse<T>> {
      *
      * @return
      */
-    public Disposable request(@NonNull ResultCallback callback) {
+    public void request(@NonNull ResultCallback callback) {
         mCallBack = callback;
-        Disposable disposable = mObserVable.subscribe(new Consumer<BaseReponse<T>>() {
+        mObserVable.subscribe(new Observer<R>() {
             @Override
-            public void accept(BaseReponse<T> response) throws Exception {
-                if (!isSuccess(response.getCode())) {
-                    throw new ApiException(response.getCode(), response.getMsg());
+            public void onSubscribe(Disposable d) {
+                if (mRxLife != null) {
+                    mRxLife.add(d);
                 }
-                mCallBack.onSuccess(response.getCode(), response.getData());
             }
-        }, new Consumer<Throwable>() {
+
             @Override
-            public void accept(Throwable e) throws Exception {
+            public void onNext(R r) {
+                if (!isSuccess(r.getCode())) {
+                    mCallBack.onFailed(r.getCode(), r.getMsg());
+                }
+                mCallBack.onSuccess(r.getCode(), r.getData());
+            }
+
+            @Override
+            public void onError(Throwable e) {
                 if (e instanceof ApiException) {
                     ApiException exception = (ApiException) e;
                     mCallBack.onFailed(exception.getCode(), (exception.getMsg()));
@@ -74,34 +82,21 @@ public class RxRequest<T, R extends BaseReponse<T>> {
                         mListener.onError(handle);
                     }
                 }
+            }
+
+            @Override
+            public void onComplete() {
                 if (mListener != null) {
                     mListener.onFinish();
-                }
-            }
-        }, new Action() {
-            @Override
-            public void run() throws Exception {
-                if (mListener != null) {
-                    mListener.onFinish();
-                }
-            }
-        }, new Consumer<Disposable>() {
-            @Override
-            public void accept(Disposable disposable) throws Exception {
-                if (mListener != null) {
-                    mListener.onStart();
                 }
             }
         });
-        if (mRxLife != null) {
-            mRxLife.add(disposable);
-        }
-        return disposable;
     }
 
 
     /**
      * 判断返回状态码是否正确
+     *
      * @param code
      * @return
      */
