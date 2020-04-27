@@ -1,12 +1,17 @@
 package com.hl.qh;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.lib_api.config.ApiConfig;
 import com.hl.lib.common.BaseApplication;
 import com.hl.lib.common.http.RxHttp;
 import com.hl.lib.common.http.setting.DefaultRequestSetting;
+import com.hl.lib.common.util.LogUtils;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.LogAdapter;
+import com.orhanobut.logger.Logger;
 
 /**
  * Description: <MyApplication><br>
@@ -20,6 +25,8 @@ public class MyApplication extends BaseApplication {
 //        RetrofitManager.init(this);
         //路由初始化
         initARouter();
+        //初始化日志框架
+        initLogger();
         //rxhttp 初始化
         RxHttp.init(this);
         RxHttp.initRequest(new DefaultRequestSetting() {
@@ -35,8 +42,13 @@ public class MyApplication extends BaseApplication {
             }
         });
     }
+    /**
+     * 初始化日志
+     */
+    private void initLogger() {
+        LogUtils.logInit(BuildConfig.DEBUG);
 
-
+    }
     /**
      * 初始化ARouter
      */

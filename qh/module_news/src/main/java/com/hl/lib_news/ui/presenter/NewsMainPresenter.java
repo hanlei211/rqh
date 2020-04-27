@@ -3,6 +3,7 @@ package com.hl.lib_news.ui.presenter;
 import com.hl.lib.common.http.RxLife;
 import com.hl.lib.common.http.exception.ExceptionHandle;
 import com.hl.lib.common.http.request.RxRequest;
+import com.hl.lib.common.util.LogUtils;
 import com.hl.lib_news.api.NewsApi;
 import com.hl.lib_news.ui.bean.WeatherBean;
 import com.hl.lib_news.ui.contract.NewMainContract;
@@ -20,7 +21,7 @@ public class NewsMainPresenter extends NewMainContract.Presenter {
             @Override
             public void onStart() {
                 timeStart = System.currentTimeMillis();
-                HttpLoggingInterceptor.Logger.DEFAULT.log("timeStart");
+                LogUtils.logd(timeStart+"");
 
             }
 
@@ -32,19 +33,20 @@ public class NewsMainPresenter extends NewMainContract.Presenter {
             @Override
             public void onFinish() {
                 long cast = System.currentTimeMillis() - timeStart;
-
+                LogUtils.logd(cast+"");
             }
         }).request(new RxRequest.ResultCallback<List<WeatherBean>>() {
             @Override
             public void onSuccess(int code, List<WeatherBean> data) {
-                HttpLoggingInterceptor.Logger.DEFAULT.log(code+"");
-                HttpLoggingInterceptor.Logger.DEFAULT.log(data+"");
+                LogUtils.logd("code:"+code);
+                LogUtils.logd("data:"+data);
                 mView.returnNewsChannelData(data);
             }
 
             @Override
             public void onFailed(int code, String msg) {
-                mView.showNetErrView();
+                LogUtils.logd("code:"+code);
+                LogUtils.logd("data:"+msg);
             }
         }));
     }

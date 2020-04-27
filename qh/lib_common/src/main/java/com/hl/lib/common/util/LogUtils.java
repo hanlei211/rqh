@@ -1,33 +1,37 @@
 package com.hl.lib.common.util;
 
 
+import android.support.annotation.Nullable;
+
 import com.hl.lib.common.baseapp.AppConfig;
-import com.orhanobut.logger.LogLevel;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.PrettyFormatStrategy;
 
 /**
  * 如果用于android平台，将信息记录到“LogCat”。如果用于java平台，将信息记录到“Console”
  * 使用logger封装
  */
 public class LogUtils {
-    public static boolean DEBUG_ENABLE =false;// 是否调试模式
+    public static boolean DEBUG_ENABLE =true;// 是否调试模式
     /**
      * 在application调用初始化
      */
     public static void logInit(boolean debug) {
         DEBUG_ENABLE=debug;
-        if (DEBUG_ENABLE) {
-            Logger.init(AppConfig.DEBUG_TAG)                 // default PRETTYLOGGER or use just init()
-                    .methodCount(2)                 // default 2
-                    .logLevel(LogLevel.FULL)        // default LogLevel.FULL
-                    .methodOffset(0);                // default 0
-        } else {
-            Logger.init()                 // default PRETTYLOGGER or use just init()
-                    .methodCount(3)                 // default 2
-                    .hideThreadInfo()               // default shown
-                    .logLevel(LogLevel.NONE)        // default LogLevel.FULL
-                    .methodOffset(2);
-        }
+        FormatStrategy  strategy = PrettyFormatStrategy.newBuilder()
+                .showThreadInfo(false)
+                .methodCount(3)
+                .methodOffset(2)
+                .tag("hl_logger")
+                .build();
+        Logger.addLogAdapter(new AndroidLogAdapter(strategy));
+        Logger.addLogAdapter(new AndroidLogAdapter(){
+            @Override public boolean isLoggable(int priority, @Nullable String tag) {
+                return DEBUG_ENABLE;
+            }
+        });
     }
     public static void logd(String tag, String message) {
         if (DEBUG_ENABLE) {
