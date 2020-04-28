@@ -67,14 +67,12 @@ public class NewsListAdapter extends MultiItemRecycleViewAdapter<NewsDetail> {
             title = "头条";
         }
         String ptime = newsDetail.time;
-        String digest = newsDetail.pic;
-        String imgSrc = newsDetail.src;
+        String imgSrc = newsDetail.pic;
 
         holder.setText(R.id.news_summary_title_tv,title);
         holder.setText(R.id.news_summary_ptime_tv,ptime);
-        holder.setText(R.id.news_summary_digest_tv,digest);
-//        holder.setImageUrl(R.id.news_summary_photo_iv,imgSrc);
-        holder.setOnClickListener(R.id.rl_root, new View.OnClickListener() {
+        holder.setImageUrl(R.id.news_summary_photo,imgSrc);
+        holder.setOnClickListener(R.id.ll_root, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                NewsDetailActivity.startAction(mContext,holder.getView(R.id.news_summary_photo_iv),newsDetail.getPostid(),newsDetail.getImgsrc());
@@ -91,11 +89,11 @@ public class NewsListAdapter extends MultiItemRecycleViewAdapter<NewsDetail> {
     private void setPhotoItemValues(ViewHolderHelper holder, final NewsDetail newsDetail, int position) {
         String title = newsDetail.title;
         String ptime = newsDetail.time;
-        String imgSrc = newsDetail.src;
+        String imgSrc = newsDetail.pic;
 
         holder.setText(R.id.news_summary_title_tv,title);
         holder.setText(R.id.news_summary_ptime_tv,ptime);
-//        holder.setImageUrl(R.id.news_summary_photo_iv,imgSrc);
+        holder.setImageUrl(R.id.news_summary_photo,imgSrc);
         holder.setOnClickListener(R.id.ll_root, new View.OnClickListener() {
             @Override
             public void onClick(View view) {

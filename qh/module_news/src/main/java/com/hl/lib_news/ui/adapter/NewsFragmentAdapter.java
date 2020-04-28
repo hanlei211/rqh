@@ -1,6 +1,7 @@
 package com.hl.lib_news.ui.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -36,6 +37,11 @@ public class NewsFragmentAdapter  extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return pages!=null?pages.size():0;
+    }
+
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return POSITION_NONE;
     }
 
     @Nullable

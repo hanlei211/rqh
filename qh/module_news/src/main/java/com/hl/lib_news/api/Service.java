@@ -21,5 +21,5 @@ public interface Service {
      * 获取新闻列表
      */
     @GET("news/get?")
-    Observable<ResponseBean<NewsListResult>> getNewsListData(@Query("appkey") String appkey);
+    Observable<ResponseBean<NewsListResult>> getNewsListData(@Query("appkey") String appkey,@Query("channel")String channel);
 }

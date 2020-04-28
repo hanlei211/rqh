@@ -6,9 +6,11 @@ import com.hl.lib.common.http.exception.ExceptionHandle;
 import com.hl.lib.common.http.listener.RequestListener;
 import com.hl.lib.common.http.request.RxRequest;
 import com.hl.lib.common.util.LogUtils;
+import com.hl.lib_news.R;
 import com.hl.lib_news.api.NewsApi;
 import com.hl.lib_news.ui.contract.NewMainContract;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class NewsMainPresenter extends NewMainContract.Presenter {
@@ -25,7 +27,10 @@ public class NewsMainPresenter extends NewMainContract.Presenter {
             @Override
             public void onError(ExceptionHandle exception) {
                 LogUtils.logd("onError(" + exception.getMsg() + ")");
-                mView.showNoDataView();
+//                mView.showNoDataView();
+                List<String> myChannelNameList = Arrays.asList(mContext.getResources().getStringArray(R.array.news_channel_name));
+                mView.showChannelType(myChannelNameList);
+                mView.initTabLayout();
             }
 
             @Override

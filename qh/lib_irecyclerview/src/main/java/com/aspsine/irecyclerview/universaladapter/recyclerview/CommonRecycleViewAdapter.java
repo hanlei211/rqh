@@ -193,6 +193,14 @@ public abstract class CommonRecycleViewAdapter<T> extends RecyclerView.Adapter<V
         notifyDataSetChanged();
     }
 
+    public void refresh(List<T> list){
+        mDatas.clear();
+        if (list != null && list.size() > 0) {
+            mDatas.addAll(list);
+        }
+        notifyDataSetChanged();
+    }
+
     @Override
     public void addAll(List<T> elements) {
         mDatas.addAll(elements);

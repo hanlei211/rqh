@@ -3,5 +3,6 @@
 
     <application>
         <activity android:name=".ui.activity.MainActivity" />
+        <activity android:name=".ui.activity.NewsChannelActivitiy"/>
     </application>
 </manifest>

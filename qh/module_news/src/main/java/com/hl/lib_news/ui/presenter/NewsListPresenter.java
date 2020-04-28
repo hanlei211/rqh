@@ -14,11 +14,19 @@ import com.hl.lib_news.ui.model.NewsListResult;
 
 import java.util.List;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
 public class NewsListPresenter extends NewsListContract.Presenter {
 
+    public String newsType;
+
+    public void setNewsType(String newsType){
+        this.newsType = newsType;
+    }
     @Override
     public void getNewsListData(String newsType) {
-        RxRequest.create(NewsApi.api().getNewsListData(AppConfig.APP_KEY)).listener(new RequestListener() {
+        RxRequest.create(NewsApi.api().getNewsListData(AppConfig.APP_KEY,newsType)).listener(new RequestListener() {
             private long timeStart = 0;
             @Override
             public void onStart() {
@@ -39,7 +47,12 @@ public class NewsListPresenter extends NewsListContract.Presenter {
         }).request(new ResultCallback<NewsListResult>() {
             @Override
             public void onSuccess(int code, NewsListResult data) {
-                mView.showNewsListData(data.list);
+                if (data.list != null && data.list.size() > 0) {
+                    mView.showNewsListData(data.list);
+                } else {
+                    mView.showNoDataView();
+                }
+                mView.stopRefresh();
             }
 
             @Override
@@ -49,6 +62,76 @@ public class NewsListPresenter extends NewsListContract.Presenter {
     }
 
     public void refreshData(){
+        RxRequest.create(NewsApi.api().getNewsListData(AppConfig.APP_KEY,newsType)).listener(new RequestListener() {
+            private long timeStart = 0;
+            @Override
+            public void onStart() {
+                timeStart = System.currentTimeMillis();
+            }
 
+            @Override
+            public void onError(ExceptionHandle exception) {
+                LogUtils.logd("exception"+exception.getMsg());
+                mView.showNoDataView();
+            }
+
+            @Override
+            public void onFinish() {
+                long cast = System.currentTimeMillis() - timeStart;
+                LogUtils.logd(cast+"");
+            }
+        }).request(new ResultCallback<NewsListResult>() {
+            @Override
+            public void onSuccess(int code, NewsListResult data) {
+                if (data.list != null && data.list.size() > 0) {
+                    mView.refreshData(data.list);
+                } else {
+                    mView.showNoDataView();
+                }
+                mView.stopRefresh();
+            }
+
+            @Override
+            public void onFailed(int code, String msg) {
+                mView.stopRefresh();
+            }
+        });
+    }
+
+    public void loadMoreData() {
+        RxRequest.create(NewsApi.api().getNewsListData(AppConfig.APP_KEY,newsType)).listener(new RequestListener() {
+            private long timeStart = 0;
+            @Override
+            public void onStart() {
+                timeStart = System.currentTimeMillis();
+            }
+
+            @Override
+            public void onError(ExceptionHandle exception) {
+                LogUtils.logd("exception"+exception.getMsg());
+                mView.showNoDataView();
+            }
+
+            @Override
+            public void onFinish() {
+                long cast = System.currentTimeMillis() - timeStart;
+                LogUtils.logd(cast+"");
+            }
+        }).request(new ResultCallback<NewsListResult>() {
+            @Override
+            public void onSuccess(int code, NewsListResult data) {
+                if (data.list != null && data.list.size() > 0) {
+                    mView.loadMoreData(data.list);
+                } else {
+                    mView.showNoDataView();
+                }
+                mView.stopLoadMore();
+            }
+
+            @Override
+            public void onFailed(int code, String msg) {
+                mView.stopLoadMore();
+            }
+        });
     }
 }

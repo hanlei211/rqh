@@ -85,18 +85,14 @@ public class NewsListFragment  extends BaseRefreshMvpFragment<NewsListPresenter,
 
     @Override
     public void refreshData(List data) {
-
+        newsListAdapter.refresh(data);
     }
 
     @Override
     public void loadMoreData(List data) {
-
+        newsListAdapter.addAll(data);
     }
 
-    @Override
-    public void onRefreshEvent() {
-
-    }
 
     @Override
     public void initPresenter() {
@@ -104,17 +100,21 @@ public class NewsListFragment  extends BaseRefreshMvpFragment<NewsListPresenter,
     }
 
     @Override
-    public void onLoadMoreEvent() {
+    public void onRefreshEvent() {
+        mPresenter.setNewsType(newsType);
+        mPresenter.refreshData();
+    }
 
+    @Override
+    public void onLoadMoreEvent() {
+        mPresenter.setNewsType(newsType);
+        mPresenter.loadMoreData();
     }
 
     @Override
     public void onAutoLoadEvent() {
-
+        mPresenter.setNewsType(newsType);
+        mPresenter.refreshData();
     }
 
-    @Override
-    public void autoLoadData() {
-
-    }
 }

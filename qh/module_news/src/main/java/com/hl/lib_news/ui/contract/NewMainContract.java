@@ -12,7 +12,7 @@ public interface NewMainContract {
     }
 
     interface View extends BaseView {
-       void  showChannelType(List<String > chanelType);
+       void  showChannelType(List<String> chanelType);
 
         void initTabLayout();
     }

@@ -23,8 +23,6 @@ import android.widget.TextView;
 
 import com.hl.lib.common.util.ImageLoaderUtils;
 
-import java.io.File;
-
 public class ViewHolderHelper extends RecyclerView.ViewHolder {
     private SparseArray<View> mViews;
     private int mPosition;
@@ -108,26 +106,22 @@ public class ViewHolderHelper extends RecyclerView.ViewHolder {
         ImageLoaderUtils.display(mContext,view,url);
         return this;
     }
-//    public ViewHolderHelper setBigImageUrl(int viewId, String url) {
-//        ImageView view = getView(viewId);
-//        ImageLoaderUtils.displayBigPhoto(mContext,view,url);
-//        return this;
-//    }
-//    public ViewHolderHelper setSmallImageUrl(int viewId, String url) {
-//        ImageView view = getView(viewId);
-//        ImageLoaderUtils.displaySmallPhoto(mContext,view,url);
-//        return this;
-//    }
-//    public ViewHolderHelper setImageRoundUrl(int viewId, String url) {
-//        ImageView view = getView(viewId);
-//        ImageLoaderUtils.displayRound(mContext,view,url);
-//        return this;
-//    }
-//    public ViewHolderHelper setImageFile(int viewId, File url) {
-//        ImageView view = getView(viewId);
-//        ImageLoaderUtils.display(mContext,view,url);
-//        return this;
-//    }
+    public ViewHolderHelper setBigImageUrl(int viewId, String url) {
+        ImageView view = getView(viewId);
+        ImageLoaderUtils.displayBigPhoto(mContext,view,url);
+        return this;
+    }
+    public ViewHolderHelper setSmallImageUrl(int viewId, String url) {
+        ImageView view = getView(viewId);
+        ImageLoaderUtils.displaySmallPhoto(mContext,view,url);
+        return this;
+    }
+    public ViewHolderHelper setImageRoundUrl(int viewId, String url) {
+        ImageView view = getView(viewId);
+        ImageLoaderUtils.displayRound(mContext,view,url);
+        return this;
+    }
+
     public ViewHolderHelper setImageDrawable(int viewId, Drawable drawable) {
         ImageView view = getView(viewId);
         view.setImageDrawable(drawable);

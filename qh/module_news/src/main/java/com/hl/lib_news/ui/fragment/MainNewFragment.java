@@ -6,9 +6,11 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.hl.lib.common.base.BaseMvpFragment;
 import com.hl.lib_news.R;
+import com.hl.lib_news.ui.activity.NewsChannelActivitiy;
 import com.hl.lib_news.ui.adapter.NewsFragmentAdapter;
 import com.hl.lib_news.ui.contract.NewMainContract;
 import com.hl.lib_news.ui.model.NewsMainModel;
@@ -20,6 +22,7 @@ import java.util.List;
 public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMainModel> implements NewMainContract.View{
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
+    private ImageView imageView;
     private List<String> titles = new ArrayList<>();
     private List<NewsListFragment> newsListFragments = new ArrayList<>();
     private NewsFragmentAdapter adapter;
@@ -59,6 +62,13 @@ public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMain
     public void initView(View view) {
       mViewPager = view.findViewById(R.id.pager_tour);
       mTabLayout = view.findViewById(R.id.layout_tour);
+      imageView = view.findViewById(R.id.add_channel_iv);
+      imageView.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              startActivity(NewsChannelActivitiy.class);
+          }
+      });
     }
 
     @Override
