@@ -28,6 +28,7 @@ public class NewsMainPresenter extends NewMainContract.Presenter {
             public void onError(ExceptionHandle exception) {
                 LogUtils.logd("onError(" + exception.getMsg() + ")");
 //                mView.showNoDataView();
+                mView.hideInitLoadView();
                 List<String> myChannelNameList = Arrays.asList(mContext.getResources().getStringArray(R.array.news_channel_name));
                 mView.showChannelType(myChannelNameList);
                 mView.initTabLayout();
@@ -46,6 +47,7 @@ public class NewsMainPresenter extends NewMainContract.Presenter {
 
             @Override
             public void onFailed(int code, String msg) {
+                mView.hideInitLoadView();
             }
         });
     }

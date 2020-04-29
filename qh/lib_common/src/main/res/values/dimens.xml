@@ -14,4 +14,6 @@
     <dimen name="font_normal3">20sp</dimen>
     <dimen name="font_large">24sp</dimen>
 
+    <dimen name="actionBarSize">40dp</dimen>
+
 </resources>

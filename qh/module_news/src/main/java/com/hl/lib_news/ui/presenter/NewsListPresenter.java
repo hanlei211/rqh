@@ -7,6 +7,7 @@ import com.hl.lib.common.http.exception.ExceptionHandle;
 import com.hl.lib.common.http.listener.RequestListener;
 import com.hl.lib.common.http.request.RxRequest;
 import com.hl.lib.common.util.LogUtils;
+import com.hl.lib.common.util.NetUtil;
 import com.hl.lib_news.api.NewsApi;
 import com.hl.lib_news.ui.bean.NewsDetail;
 import com.hl.lib_news.ui.contract.NewsListContract;
@@ -26,6 +27,10 @@ public class NewsListPresenter extends NewsListContract.Presenter {
     }
     @Override
     public void getNewsListData(String newsType) {
+        if (!NetUtil.checkNetToast()) {
+            mView.showNetErrView();
+            return;
+        }
         RxRequest.create(NewsApi.api().getNewsListData(AppConfig.APP_KEY,newsType)).listener(new RequestListener() {
             private long timeStart = 0;
             @Override
@@ -36,6 +41,7 @@ public class NewsListPresenter extends NewsListContract.Presenter {
             @Override
             public void onError(ExceptionHandle exception) {
                 LogUtils.logd("exception"+exception.getMsg());
+                mView.stopRefresh();
                 mView.showNoDataView();
             }
 
@@ -57,11 +63,16 @@ public class NewsListPresenter extends NewsListContract.Presenter {
 
             @Override
             public void onFailed(int code, String msg) {
+                mView.stopRefresh();
             }
         });
     }
 
     public void refreshData(){
+        if (!NetUtil.checkNetToast()) {
+            mView.showNetErrView();
+            return;
+        }
         RxRequest.create(NewsApi.api().getNewsListData(AppConfig.APP_KEY,newsType)).listener(new RequestListener() {
             private long timeStart = 0;
             @Override
@@ -72,6 +83,7 @@ public class NewsListPresenter extends NewsListContract.Presenter {
             @Override
             public void onError(ExceptionHandle exception) {
                 LogUtils.logd("exception"+exception.getMsg());
+                mView.stopRefresh();
                 mView.showNoDataView();
             }
 
@@ -99,6 +111,10 @@ public class NewsListPresenter extends NewsListContract.Presenter {
     }
 
     public void loadMoreData() {
+        if (!NetUtil.checkNetToast()) {
+            mView.showNetErrView();
+            return;
+        }
         RxRequest.create(NewsApi.api().getNewsListData(AppConfig.APP_KEY,newsType)).listener(new RequestListener() {
             private long timeStart = 0;
             @Override
@@ -109,6 +125,7 @@ public class NewsListPresenter extends NewsListContract.Presenter {
             @Override
             public void onError(ExceptionHandle exception) {
                 LogUtils.logd("exception"+exception.getMsg());
+                mView.stopLoadMore();
                 mView.showNoDataView();
             }
 

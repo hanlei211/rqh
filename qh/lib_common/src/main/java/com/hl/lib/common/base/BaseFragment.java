@@ -184,18 +184,20 @@ public abstract class BaseFragment extends Fragment implements IView {
     public void showNoDataView() {
         showNoDataView(true);
     }
+
     public void showNoDataView(int resid) {
         showNoDataView(true,resid);
     }
+
     public void hideNoDataView() {
         showNoDataView(false);
     }
-
-    public void showNetWorkErrView() {
+    @Override
+    public void showNetErrView() {
         showNetWorkErrView(true);
     }
-
-    public void hideNetWorkErrView() {
+    @Override
+    public void hideNetErrView() {
         showNetWorkErrView(false);
     }
 
@@ -213,17 +215,17 @@ public abstract class BaseFragment extends Fragment implements IView {
         if (mNetErrorView == null) {
             View view = mViewStubError.inflate();
             mNetErrorView = view.findViewById(R.id.view_net_error);
-            mNetErrorView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (!NetUtil.checkNetToast()) {
-                        return;
-                    }
-                    hideNetWorkErrView();
-                    initData();
-                }
-            });
         }
+        mNetErrorView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!NetUtil.checkNetToast()) {
+                    return;
+                }
+                hideNetErrView();
+                initData();
+            }
+        });
         mNetErrorView.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 

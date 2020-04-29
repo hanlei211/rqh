@@ -69,16 +69,6 @@ public class NewsListFragment extends BaseRefreshMvpFragment<NewsListPresenter, 
     }
 
     @Override
-    public void showNetErrView() {
-
-    }
-
-    @Override
-    public void hideNetErrView() {
-
-    }
-
-    @Override
     public void showNewsListData(List<NewsDetail> newsDetails) {
         newsListAdapter = new NewsListAdapter(getContext(), newsDetails);
         mRecylerView.setAdapter(newsListAdapter);
