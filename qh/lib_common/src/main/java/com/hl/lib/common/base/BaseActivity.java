@@ -294,67 +294,6 @@ public abstract class BaseActivity extends RxAppCompatActivity  implements IView
     }
 
 
-    /**
-     * 开启浮动加载进度条
-     */
-    public void startProgressDialog() {
-        LoadingDialog.showDialogForLoading(this);
-    }
-
-
-    /**
-     * 停止浮动加载进度条
-     */
-    public void stopProgressDialog() {
-        LoadingDialog.cancelDialogForLoading();
-    }
-
-    /**
-     * 短暂显示Toast提示(来自String)
-     **/
-    public void showShortToast(String text) {
-        ToastUtil.showShort(text);
-    }
-
-    /**
-     * 短暂显示Toast提示(id)
-     **/
-    public void showShortToast(int resId) {
-        ToastUtil.showShort(resId);
-    }
-
-    /**
-     * 长时间显示Toast提示(来自res)
-     **/
-    public void showLongToast(int resId) {
-        ToastUtil.showLong(resId);
-    }
-
-    /**
-     * 长时间显示Toast提示(来自String)
-     **/
-    public void showLongToast(String text) {
-        ToastUtil.showLong(text);
-    }
-    /**
-     * 带图片的toast
-     * @param text
-     * @param res
-     */
-    public void showToastWithImg(String text,int res) {
-        ToastUtil.showToastWithImg(text,res);
-    }
-
-    /**
-     * 网络访问错误提醒
-     */
-    public void showNetErrorTip() {
-        ToastUtil.showToastWithImg(getText(R.string.net_error).toString(),R.drawable.ic_wifi_off);
-    }
-    public void showNetErrorTip(String error) {
-        ToastUtil.showToastWithImg(error,R.drawable.ic_wifi_off);
-    }
-
 
     @Override
     protected void onResume() {

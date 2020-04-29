@@ -72,13 +72,13 @@ public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMain
     }
 
     @Override
-    public void showChannelType(List<String> model) {
+    public void showChannelType(List<String> newsTypes) {
         newsListFragments.clear();
         titles.clear();
-        if(model != null){
-            for(String i : model){
-                titles.add(i);
-                newsListFragments.add(NewsListFragment.newInstance(i));
+        if(newsTypes != null){
+            for(String newType : newsTypes){
+                titles.add(newType);
+                newsListFragments.add(NewsListFragment.newInstance(newType));
             }
         }
     }

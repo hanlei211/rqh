@@ -45,7 +45,9 @@ public class ExceptionHandle {
                 return Code.JSON;
             } else if (e instanceof SSLException) {
                 return Code.SSL;
-            } else {
+            } else  if(e instanceof  IllegalStateException) {
+                return Code.LIMIT;
+            }else{
                 return Code.UNKNOWN;
             }
         }
@@ -81,6 +83,9 @@ public class ExceptionHandle {
             case Code.SSL:
                 msg = "证书验证失败";
                 break;
+            case Code.LIMIT:
+                msg = "请求超过次数限制";
+                break;
         }
         return msg;
     }
@@ -105,5 +110,6 @@ public class ExceptionHandle {
         int HTTP = 3;
         int HOST = 4;
         int SSL = 5;
+        int LIMIT = 104;
     }
 }
