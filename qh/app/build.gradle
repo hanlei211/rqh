@@ -32,6 +32,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':lib_common')
     implementation project(path: ':lib_api')
+    implementation project(path: ':lib_irecyclerview')
     if (!isModule.toBoolean()) {
         implementation project(':module_main')
         implementation project(':module_news')
