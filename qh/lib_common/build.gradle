@@ -77,4 +77,5 @@ dependencies {
     api deps.butterknife
     api deps.logger
     api deps.banner
+    api deps.leakcanary
 }

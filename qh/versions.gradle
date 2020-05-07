@@ -44,6 +44,8 @@ versions.logger = "2.2.0"
 
 versions.banner = "1.0.0"
 
+versions.leakcanary="1.6.3"
+
 
 
 
@@ -112,6 +114,9 @@ deps.logger  = "com.orhanobut:logger:$versions.logger"
 
 //banner
 deps.banner = "com.github.hanlei211:-adBanner:$versions.banner"
+
+//leakCanary
+deps.leakcanary = "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
 
 
 

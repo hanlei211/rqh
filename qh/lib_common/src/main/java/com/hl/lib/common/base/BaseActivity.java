@@ -88,7 +88,7 @@ public abstract class BaseActivity extends RxAppCompatActivity  implements IView
      * 着色状态栏（4.4以上系统有效）
      */
     protected void SetStatusBarColor(){
-        StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this,R.color.main_color));
+        StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this,R.color.main_blue));
     }
     /**
      * 着色状态栏（4.4以上系统有效）

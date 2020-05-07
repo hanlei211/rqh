@@ -8,11 +8,16 @@ import com.hl.lib.common.http.interceptor.BaseUrlRedirectInterceptor;
 import com.hl.lib.common.http.interceptor.CacheControlInterceptor;
 import com.hl.lib.common.http.interceptor.PublicHeadersInterceptor;
 import com.hl.lib.common.http.interceptor.PublicQueryParameterInterceptor;
+import com.hl.lib.common.http.setting.SSLContextUtil;
 
 import java.io.File;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
 
 import okhttp3.Cache;
 import okhttp3.Interceptor;
@@ -122,6 +127,7 @@ public class RetrofitManager {
      *
      * @return OkHttpClient
      */
+    @SuppressWarnings("deprecation")
     private OkHttpClient createOkHttpClient() {
         OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
         //添加调试打印log
@@ -142,6 +148,12 @@ public class RetrofitManager {
         PublicHeadersInterceptor.addTo(okHttpClient);
         PublicQueryParameterInterceptor.addTo(okHttpClient);
         CacheControlInterceptor.addTo(okHttpClient);
+        SSLContext sslContext = SSLContextUtil.getDefaultSLLContext();
+        if (sslContext != null) {
+            SSLSocketFactory socketFactory = sslContext.getSocketFactory();
+            okHttpClient.sslSocketFactory(socketFactory);
+        }
+        okHttpClient.hostnameVerifier(SSLContextUtil.HOSTNAME_VERIFIER);
         Interceptor[] interceptors = RxHttp.getRequestSetting().getInterceptors();
         if (interceptors != null && interceptors.length > 0) {
             for (Interceptor interceptor : interceptors) {
