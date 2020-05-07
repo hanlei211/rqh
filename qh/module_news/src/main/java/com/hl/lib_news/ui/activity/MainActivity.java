@@ -1,7 +1,7 @@
 package com.hl.lib_news.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.hl.lib_news.R;
 import com.hl.lib_news.ui.fragment.MainNewFragment;

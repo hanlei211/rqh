@@ -11,7 +11,7 @@
         android:background="@color/main_color"
         android:orientation="horizontal">
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/layout_tour"
             android:layout_width="0dp"
             android:layout_height="40dp"
@@ -34,7 +34,7 @@
             android:src="@drawable/ic_add"/>
     </LinearLayout>
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager_tour"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

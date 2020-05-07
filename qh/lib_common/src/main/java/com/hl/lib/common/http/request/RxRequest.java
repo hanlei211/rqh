@@ -1,7 +1,7 @@
 package com.hl.lib.common.http.request;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.hl.lib.common.http.RxHttp;
 import com.hl.lib.common.http.RxLife;
@@ -15,8 +15,6 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 

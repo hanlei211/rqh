@@ -1,7 +1,7 @@
 package com.hl.lib_news.provider;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.hl.lib.common.provider.INewsProvider;

@@ -2,7 +2,7 @@ package com.aspsine.irecyclerview.baseadapter;
 
 import android.animation.Animator;
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;

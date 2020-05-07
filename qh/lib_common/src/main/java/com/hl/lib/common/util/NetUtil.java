@@ -3,7 +3,7 @@ package com.hl.lib.common.util;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.hl.lib.common.BaseApplication;
 import com.hl.lib.common.http.RxHttp;

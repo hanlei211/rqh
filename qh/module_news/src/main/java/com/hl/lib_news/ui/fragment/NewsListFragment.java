@@ -2,13 +2,15 @@ package com.hl.lib_news.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.hl.lib.common.base.BaseRefreshMvpFragment;
 import com.hl.lib_news.R;
 import com.hl.lib_news.ui.adapter.NewsListAdapter;
+import com.hl.lib_news.ui.bean.DataBean;
 import com.hl.lib_news.ui.bean.NewsDetail;
 import com.hl.lib_news.ui.contract.NewsListContract;
 import com.hl.lib_news.ui.model.NewsListModel;
@@ -80,12 +82,26 @@ public class NewsListFragment extends BaseRefreshMvpFragment<NewsListPresenter, 
 
     @Override
     public void showNewsListData(List<NewsDetail> newsDetails) {
+       addBanner(newsDetails);
         newsListAdapter = new NewsListAdapter(getContext(), newsDetails);
         mRecylerView.setAdapter(newsListAdapter);
     }
 
+    /**
+     * 添加广告轮播
+     * @param newsDetails
+     */
+    private void addBanner(List<NewsDetail> newsDetails) {
+        if(newsDetails != null){
+            NewsDetail newsDetail = new NewsDetail();
+            newsDetail.banners = DataBean.getTestData();
+            newsDetails.add(0,newsDetail);
+        }
+    }
+
     @Override
     public void refreshData(List data) {
+        addBanner(data);
         newsListAdapter.refresh(data);
     }
 

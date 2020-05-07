@@ -9,7 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         //添加 防止 butterknife 报错
         javaCompileOptions {
             // 显式声明支持注解
