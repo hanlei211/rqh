@@ -1,15 +1,18 @@
 package com.hl.lib.common.commonwidget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * des:修复viewpager
  * Created by xsf
  * on 2016.07.15:33
  */
-public class ViewPagerFixed extends android.support.v4.view.ViewPager {
+public class ViewPagerFixed extends ViewPager {
 
     public ViewPagerFixed(Context context) {
         super(context);
@@ -19,6 +22,7 @@ public class ViewPagerFixed extends android.support.v4.view.ViewPager {
         super(context, attrs);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         try {

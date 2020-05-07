@@ -1,18 +1,15 @@
 package com.hl.qh;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.annotation.SuppressLint;
+
+import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.lib_api.config.ApiConfig;
 import com.hl.lib.common.BaseApplication;
-import com.hl.lib.common.baseapp.AppConfig;
 import com.hl.lib.common.http.RxHttp;
 import com.hl.lib.common.http.setting.DefaultRequestSetting;
 import com.hl.lib.common.util.LogUtils;
-import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.LogAdapter;
-import com.orhanobut.logger.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,6 +66,7 @@ public class MyApplication extends BaseApplication {
             @Override
             public void setOkHttpClient(OkHttpClient.Builder builder) {
                 builder.hostnameVerifier(new HostnameVerifier() {
+                    @SuppressLint("BadHostnameVerifier")
                     @Override
                     public boolean verify(String hostname, SSLSession session) {
                         return true;

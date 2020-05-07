@@ -3,7 +3,6 @@ package com.hl.lib.common.baseapp;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
-import android.drm.DrmStore;
 
 import java.util.Stack;
 
@@ -162,6 +161,7 @@ public class AppManager {
      * @param context      上下文
      * @param isBackground 是否开开启后台运行
      */
+    @SuppressWarnings("deprecation")
     public void AppExit(Context context, Boolean isBackground) {
         try {
             finishAllActivity();

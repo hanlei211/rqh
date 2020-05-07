@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,7 +11,7 @@
         android:layout_marginBottom="8dp"
         android:layout_above="@id/bt_navigation"
         />
-    <android.support.design.widget.BottomNavigationView
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bt_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,5 +23,5 @@
         app:itemTextColor="@color/color_state_menu_navi"
         app:itemIconTint="@color/color_state_menu_navi"
         android:layout_alignParentBottom="true"
-        />
+        tools:ignore="InconsistentLayout" />
 </RelativeLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -8,21 +9,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/main_color"
+        android:background="@color/main_blue"
         android:orientation="horizontal">
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/layout_tour"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:layout_gravity="center"
-            app:tabIndicatorColor="#1E88E5"
+            app:tabIndicatorColor="@color/main_color"
             app:tabIndicatorHeight="2dp"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="#1E88E5"
+            app:tabSelectedTextColor="@color/main_color"
             app:tabTextAppearance="@style/TabLayoutTextStyle"
-            app:tabTextColor="#333333" />
+            app:tabTextColor="@color/color_white" />
         <ImageView
             android:id="@+id/add_channel_iv"
             android:layout_width="wrap_content"
@@ -31,10 +32,11 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:maxHeight="?attr/actionBarSize"
             android:padding="@dimen/item_margin"
-            android:src="@drawable/ic_add"/>
+            android:src="@drawable/ic_add"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager_tour"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

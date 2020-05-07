@@ -1,7 +1,7 @@
 package com.hl.lib.common.http;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.hl.lib.common.http.exception.NullRequestSettingException;
 import com.hl.lib.common.http.exception.RxHttpUninitializedException;

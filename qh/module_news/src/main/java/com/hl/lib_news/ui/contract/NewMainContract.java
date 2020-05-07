@@ -1,7 +1,6 @@
 package com.hl.lib_news.ui.contract;
 
 import com.hl.lib.common.base.BaseModel;
-import com.hl.lib.common.http.RxLife;
 import com.hl.lib.common.mvp.BasePresenter;
 import com.hl.lib.common.mvp.BaseView;
 

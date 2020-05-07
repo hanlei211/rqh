@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
@@ -18,24 +18,17 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.hl.lib.common.Interface.IView;
 import com.hl.lib.common.R;
 import com.hl.lib.common.baseapp.AppManager;
-import com.hl.lib.common.baserx.RxManager;
-import com.hl.lib.common.commonwidget.LoadingDialog;
 import com.hl.lib.common.commonwidget.StatusBarCompat;
 import com.hl.lib.common.daynightmodeutils.ChangeModeController;
-import com.hl.lib.common.event.common.BaseActivityEvent;
-import com.hl.lib.common.http.RxLife;
 import com.hl.lib.common.util.NetUtil;
-import com.hl.lib.common.util.ToastUtil;
 import com.hl.lib.common.view.LoadingInitView;
 import com.hl.lib.common.view.NetErrorView;
 import com.hl.lib.common.view.NoDataView;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import butterknife.ButterKnife;
 
+@SuppressWarnings("FieldCanBeLocal")
 public abstract class BaseActivity extends RxAppCompatActivity  implements IView {
     private ViewStub mViewStubToolbar;
     private ViewStub mViewStubContent;
@@ -95,7 +88,7 @@ public abstract class BaseActivity extends RxAppCompatActivity  implements IView
      * 着色状态栏（4.4以上系统有效）
      */
     protected void SetStatusBarColor(){
-        StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this,R.color.main_color));
+        StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this,R.color.main_blue));
     }
     /**
      * 着色状态栏（4.4以上系统有效）

@@ -1,9 +1,9 @@
 package com.hl.lib.common.base;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.hl.lib.common.util.CollectionUtils;
 
@@ -21,6 +21,7 @@ public class BaseFragmentAdapter extends FragmentPagerAdapter {
     List<Fragment> fragmentList = new ArrayList<Fragment>();
     private List<String> mTitles;
 
+    @SuppressWarnings("deprecation")
     public BaseFragmentAdapter(FragmentManager fm, List<Fragment> fragmentList) {
         super(fm);
         this.fragmentList = fragmentList;

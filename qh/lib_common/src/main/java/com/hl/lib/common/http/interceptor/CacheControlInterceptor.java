@@ -1,6 +1,6 @@
 package com.hl.lib.common.http.interceptor;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.hl.lib.common.util.NetUtil;
 

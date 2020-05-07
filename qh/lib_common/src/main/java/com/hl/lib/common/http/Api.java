@@ -1,7 +1,5 @@
 package com.hl.lib.common.http;
 
-import android.app.Service;
-
 import com.hl.lib.common.http.manager.RetrofitManager;
 
 public class Api {

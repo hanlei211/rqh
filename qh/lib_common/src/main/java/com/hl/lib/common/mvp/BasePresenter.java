@@ -2,8 +2,6 @@ package com.hl.lib.common.mvp;
 
 import android.content.Context;
 
-import com.hl.lib.common.baserx.RxManager;
-
 
 
 public abstract class BasePresenter<M ,V extends BaseView>{

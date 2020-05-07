@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.animation.Animation;
@@ -37,6 +38,7 @@ public class AndroidVsIosHeaderView extends FrameLayout implements RefreshTrigge
         this(context, attrs, 0);
     }
 
+    @SuppressLint("WrongConstant")
     public AndroidVsIosHeaderView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         inflate(context, R.layout.layout_irecyclerview_bat_vs_supper_refresh_header_view, this);

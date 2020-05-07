@@ -1,8 +1,8 @@
 package com.aspsine.irecyclerview;
 
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 /**
  * Created by aspsine on 16/3/12.
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class WrapperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     protected static final int REFRESH_HEADER = Integer.MIN_VALUE;
     protected static final int HEADER = Integer.MIN_VALUE + 1;
