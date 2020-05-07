@@ -1,7 +1,8 @@
 package com.hl.qh;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.lib_api.config.ApiConfig;
@@ -65,6 +66,7 @@ public class MyApplication extends BaseApplication {
             @Override
             public void setOkHttpClient(OkHttpClient.Builder builder) {
                 builder.hostnameVerifier(new HostnameVerifier() {
+                    @SuppressLint("BadHostnameVerifier")
                     @Override
                     public boolean verify(String hostname, SSLSession session) {
                         return true;

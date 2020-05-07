@@ -15,6 +15,7 @@ import android.view.View;
  * Created by xsf
  * on 2016.12.02
  */
+@SuppressWarnings("NonAsciiCharacters")
 public class WaveView extends View {
 
     private Path mAbovePath, mBelowWavePath;

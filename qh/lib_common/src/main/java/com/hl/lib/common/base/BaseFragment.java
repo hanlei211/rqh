@@ -24,6 +24,7 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
 
+@SuppressWarnings("FieldCanBeLocal")
 public abstract class BaseFragment extends Fragment implements IView {
     protected static final String TAG = BaseFragment.class.getSimpleName();
     protected RxAppCompatActivity mActivity;
@@ -94,6 +95,7 @@ public abstract class BaseFragment extends Fragment implements IView {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);

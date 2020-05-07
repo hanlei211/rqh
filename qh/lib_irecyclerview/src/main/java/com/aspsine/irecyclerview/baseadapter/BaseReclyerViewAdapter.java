@@ -19,6 +19,7 @@ import java.util.List;
  * Created by xsf
  * on 2016.04.17:03
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class BaseReclyerViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     protected Context mContext;

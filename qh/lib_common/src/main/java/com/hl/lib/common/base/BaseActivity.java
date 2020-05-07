@@ -28,6 +28,7 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
 
+@SuppressWarnings("FieldCanBeLocal")
 public abstract class BaseActivity extends RxAppCompatActivity  implements IView {
     private ViewStub mViewStubToolbar;
     private ViewStub mViewStubContent;

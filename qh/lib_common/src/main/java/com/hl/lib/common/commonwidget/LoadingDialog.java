@@ -1,5 +1,6 @@
 package com.hl.lib.common.commonwidget;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.view.LayoutInflater;
@@ -23,7 +24,7 @@ public class LoadingDialog {
      * @param cancelable 对话框是否可以取消
      */
     public static Dialog showDialogForLoading(Activity context, String msg, boolean cancelable) {
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading, null);
+        @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading, null);
         TextView loadingText = (TextView)view.findViewById(R.id.id_tv_loading_dialog_text);
         loadingText.setText(msg);
 
@@ -36,7 +37,7 @@ public class LoadingDialog {
     }
 
     public static Dialog showDialogForLoading(Activity context) {
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading, null);
+        @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading, null);
         TextView loadingText = (TextView)view.findViewById(R.id.id_tv_loading_dialog_text);
         loadingText.setText("加载中...");
 

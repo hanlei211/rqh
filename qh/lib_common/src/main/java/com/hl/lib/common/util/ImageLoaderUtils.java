@@ -1,5 +1,6 @@
 package com.hl.lib.common.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.widget.ImageView;
 
@@ -16,6 +17,7 @@ import com.hl.lib.common.R;
 @GlideModule
 public class ImageLoaderUtils{
 
+    @SuppressLint("CheckResult")
     public  static RequestOptions options() {
         RequestOptions options = new RequestOptions();
         options.diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -26,6 +28,7 @@ public class ImageLoaderUtils{
         return options;
     }
 
+    @SuppressLint("CheckResult")
     public  static RequestOptions options(int placeholder, int error) {
         RequestOptions options = new RequestOptions();
         options.diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -42,7 +45,8 @@ public class ImageLoaderUtils{
      * @param error
      * @return
      */
-    public  static RequestOptions options(Context context,int error) {
+    @SuppressLint("CheckResult")
+    public  static RequestOptions options(Context context, int error) {
         RequestOptions options = new RequestOptions();
         options.diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(error)

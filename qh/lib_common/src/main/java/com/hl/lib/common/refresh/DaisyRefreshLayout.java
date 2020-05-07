@@ -1,6 +1,7 @@
 package com.hl.lib.common.refresh;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.AttributeSet;
 
 /**
@@ -68,7 +69,9 @@ public class DaisyRefreshLayout extends BaseRefreshLayout{
         super.setRefreshing(refreshing);
     }
     public void setLoadMore(boolean loadMore) {
-        mDaisyFooterView.setLoadMore(loadMore);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            mDaisyFooterView.setLoadMore(loadMore);
+        }
         super.setLoadMore(loadMore);
     }
 }

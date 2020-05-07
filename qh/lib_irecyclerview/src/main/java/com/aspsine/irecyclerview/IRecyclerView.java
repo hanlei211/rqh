@@ -2,6 +2,7 @@ package com.aspsine.irecyclerview;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import androidx.annotation.LayoutRes;
@@ -434,6 +435,7 @@ public class IRecyclerView extends RecyclerView {
         return super.onInterceptTouchEvent(e);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent e) {
         final int action = androidx.core.view.MotionEventCompat.getActionMasked(e);

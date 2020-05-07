@@ -1,5 +1,6 @@
 package com.hl.lib.common.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -102,7 +103,7 @@ public class ToastUtil {
         if (toast2 == null) {
             toast2 = new Toast(BaseApplication.getInstance());
         }
-        View view = LayoutInflater.from(BaseApplication.getInstance()).inflate(R.layout.toast_custom, null);
+        @SuppressLint("InflateParams") View view = LayoutInflater.from(BaseApplication.getInstance()).inflate(R.layout.toast_custom, null);
         TextView tv = (TextView) view.findViewById(R.id.toast_custom_tv);
         tv.setText(TextUtils.isEmpty(tvStr) ? "" : tvStr);
         ImageView iv = (ImageView) view.findViewById(R.id.toast_custom_iv);

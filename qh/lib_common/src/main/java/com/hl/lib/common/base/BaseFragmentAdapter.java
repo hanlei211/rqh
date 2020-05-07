@@ -21,6 +21,7 @@ public class BaseFragmentAdapter extends FragmentPagerAdapter {
     List<Fragment> fragmentList = new ArrayList<Fragment>();
     private List<String> mTitles;
 
+    @SuppressWarnings("deprecation")
     public BaseFragmentAdapter(FragmentManager fm, List<Fragment> fragmentList) {
         super(fm);
         this.fragmentList = fragmentList;

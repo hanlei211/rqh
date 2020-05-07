@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 /**
  * Created by aspsine on 16/3/12.
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class WrapperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     protected static final int REFRESH_HEADER = Integer.MIN_VALUE;
     protected static final int HEADER = Integer.MIN_VALUE + 1;
