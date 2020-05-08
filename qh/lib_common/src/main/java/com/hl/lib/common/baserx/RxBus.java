@@ -1,8 +1,8 @@
 package com.hl.lib.common.baserx;
 
 
+
 import java.util.HashMap;
-import java.util.Observable;
 
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
@@ -39,7 +39,6 @@ public class RxBus {
     }
 
 
-
     public void post(@NonNull Object content) {
         post(content.getClass().getName(), content);
     }
@@ -72,6 +71,7 @@ public class RxBus {
                 .subscribe(next,error);
     }
 
+
     /**
      * 是否已有观察者订阅
      *
@@ -85,20 +85,19 @@ public class RxBus {
      * @param o
      * @param disposable
      */
-    public Disposable addSubscription(Object o, Consumer<Object> disposable) {
+    public void  addSubscription(Object o, Disposable  disposable) {
         if (mSubscriptionMap == null) {
             mSubscriptionMap = new HashMap<>();
         }
         String key = o.getClass().getName();
         if (mSubscriptionMap.get(key) != null) {
-            mSubscriptionMap.get(key).add((Disposable) disposable);
+            mSubscriptionMap.get(key).add( disposable);
         } else {
             //一次性容器,可以持有多个并提供 添加和移除。
             CompositeDisposable disposables = new CompositeDisposable();
-            disposables.add((Disposable) disposable);
+            disposables.add( disposable);
             mSubscriptionMap.put(key, disposables);
         }
-        return (Disposable) disposable;
     }
 
     /**
@@ -120,7 +119,6 @@ public class RxBus {
 
         mSubscriptionMap.remove(key);
     }
-
 
 
 }

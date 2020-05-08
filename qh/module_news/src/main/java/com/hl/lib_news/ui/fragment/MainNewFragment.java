@@ -5,19 +5,27 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import com.google.android.material.tabs.TabLayout;
 import androidx.viewpager.widget.ViewPager;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.hl.lib.common.base.BaseMvpFragment;
+import com.hl.lib.common.baserx.RxBus;
+import com.hl.lib.common.http.event.BaseRxBusEvent;
+import com.hl.lib.common.util.ToastUtil;
 import com.hl.lib_news.R;
 import com.hl.lib_news.ui.activity.NewsChannelActivitiy;
 import com.hl.lib_news.ui.adapter.NewsFragmentAdapter;
+import com.hl.lib_news.ui.config.NewsConstant;
 import com.hl.lib_news.ui.contract.NewMainContract;
 import com.hl.lib_news.ui.model.NewsMainModel;
 import com.hl.lib_news.ui.presenter.NewsMainPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.functions.Consumer;
 
 public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMainModel> implements NewMainContract.View{
     private TabLayout mTabLayout;
@@ -66,7 +74,11 @@ public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMain
       imageView.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              startActivity(NewsChannelActivitiy.class);
+//              startActivity(NewsChannelActivitiy.class);
+//                mRxManager.post(NewsConstant.NEWS_LIST_TO_TOP,"");
+              RxBus rxBus = RxBus.getInstance();
+               //发送事件
+              rxBus.post(new BaseRxBusEvent());
           }
       });
     }
@@ -81,6 +93,15 @@ public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMain
                 newsListFragments.add(NewsListFragment.newInstance(newType));
             }
         }
+    }
+
+    public  void getToastLog(){
+        mRxManager.on(BaseRxBusEvent.class, NewsConstant.NEWS_LIST_TO_TOP, new Consumer<BaseRxBusEvent>() {
+            @Override
+            public void accept(BaseRxBusEvent o) throws Exception {
+                Log.e("rxBus","333");
+            }
+        });
     }
 
     @Override

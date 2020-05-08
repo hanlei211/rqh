@@ -2,21 +2,32 @@ package com.hl.lib_news.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hl.lib.common.base.BaseRefreshMvpFragment;
+import com.hl.lib.common.baserx.RxBus;
+import com.hl.lib.common.baserx.RxManager;
+import com.hl.lib.common.http.event.BaseRxBusEvent;
+import com.hl.lib.common.util.ToastUtil;
 import com.hl.lib_news.R;
 import com.hl.lib_news.ui.adapter.NewsListAdapter;
 import com.hl.lib_news.ui.bean.DataBean;
 import com.hl.lib_news.ui.bean.NewsDetail;
+import com.hl.lib_news.ui.config.NewsConstant;
 import com.hl.lib_news.ui.contract.NewsListContract;
 import com.hl.lib_news.ui.model.NewsListModel;
 import com.hl.lib_news.ui.presenter.NewsListPresenter;
 
 import java.util.List;
+
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 public class NewsListFragment extends BaseRefreshMvpFragment<NewsListPresenter, NewsListModel> implements NewsListContract.View {
     public String newsType;
@@ -77,6 +88,11 @@ public class NewsListFragment extends BaseRefreshMvpFragment<NewsListPresenter, 
         mRecylerView.setAdapter(newsListAdapter);
     }
 
+    @Override
+    public void scrollToTop() {
+        mRecylerView.smoothScrollToPosition(0);
+    }
+
     /**
      * 添加广告轮播
      * @param newsDetails
@@ -100,12 +116,15 @@ public class NewsListFragment extends BaseRefreshMvpFragment<NewsListPresenter, 
         newsListAdapter.addAll(data);
     }
 
-
     @Override
     public void initPresenter() {
-
+      mRxManager.on(BaseRxBusEvent.class, NewsConstant.NEWS_LIST_TO_TOP, new Consumer<BaseRxBusEvent>() {
+          @Override
+          public void accept(BaseRxBusEvent baseRxBusEvent) throws Exception {
+              Log.e("rxBus","333");
+          }
+      });
     }
-
     @Override
     public void onRefreshEvent() {
         if (mPresenter != null) {

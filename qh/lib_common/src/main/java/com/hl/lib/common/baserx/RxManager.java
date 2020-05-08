@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -25,20 +24,19 @@ public class RxManager {
 
     /**
      * RxBus注入监听
+     * @param type
      * @param eventName
      * @param consumer
      */
-    public <T>void on(String eventName, Consumer<Object> consumer) {
-        Observable<T> mObservable = (Observable<T>) mRxBus.addSubscription(eventName,consumer);
-        mObservables.put(eventName, mObservable);
-        /*订阅管理*/
-        mCompositeSubscription.add(mObservable.observeOn(AndroidSchedulers.mainThread())
-                .subscribe(consumer, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable)  throws Exception {
-                        throwable.printStackTrace();
-                    }
-                }));
+    public <T>void on(Class<T> type, String eventName, Consumer<T> consumer) {
+        Disposable disposable = mRxBus.doSubscribe(type, consumer, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                throwable.printStackTrace();
+            }
+        });
+        mRxBus.addSubscription(eventName,disposable);
+        mCompositeSubscription.add(disposable);
     }
 
     /**
