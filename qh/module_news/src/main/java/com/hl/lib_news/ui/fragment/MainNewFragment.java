@@ -94,15 +94,7 @@ public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMain
             }
         }
     }
-
-    public  void getToastLog(){
-        mRxManager.on(BaseRxBusEvent.class, NewsConstant.NEWS_LIST_TO_TOP, new Consumer<BaseRxBusEvent>() {
-            @Override
-            public void accept(BaseRxBusEvent o) throws Exception {
-                Log.e("rxBus","333");
-            }
-        });
-    }
+    
 
     @Override
     public void initTabLayout() {
