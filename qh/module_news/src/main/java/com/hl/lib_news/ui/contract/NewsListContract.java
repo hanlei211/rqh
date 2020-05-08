@@ -13,6 +13,8 @@ public interface NewsListContract {
 
     interface View extends BaseRefreshView {
        void  showNewsListData(List<NewsDetail> newsDetails);
+
+       void scrollToTop();
     }
     abstract static class Presenter extends BaseRefreshPresenter<Model, View> {
         public abstract void getNewsListData(String newsType);
