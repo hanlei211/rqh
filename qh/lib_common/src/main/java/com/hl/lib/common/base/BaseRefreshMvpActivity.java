@@ -26,7 +26,10 @@ public abstract class BaseRefreshMvpActivity<T extends BaseRefreshPresenter, E e
         mRxManager=new RxManager();
         mRxLife = RxLife.create();
         initPresenter();
+        onRxBusEvent();
     }
+
+    protected abstract void onRxBusEvent();
 
     @Override
     public void initCommonView() {

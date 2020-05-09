@@ -61,6 +61,7 @@ public abstract class BaseFragment extends Fragment implements IView {
         initCommonView(mView);
         initView(mView);
         initListener();
+        initData();
         return mView;
     }
 

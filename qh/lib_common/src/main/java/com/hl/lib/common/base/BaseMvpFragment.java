@@ -38,8 +38,11 @@ public abstract class BaseMvpFragment<T extends BasePresenter,E extends BaseMode
             mPresenter.mContext =this.getActivity();
         }
         initPresenter();
+        onRxBusEvent();
         return mView;
     }
+
+    protected abstract void onRxBusEvent();
 
     //简单页面无需mvp就不用管此方法即可,完美兼容各种实际场景的变通
     public abstract void initPresenter();

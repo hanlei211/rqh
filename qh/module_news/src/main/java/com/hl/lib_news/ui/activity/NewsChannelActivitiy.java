@@ -95,6 +95,11 @@ public class NewsChannelActivitiy  extends BaseMvpActivity<NewsChannelPresenter,
     }
 
     @Override
+    protected void onRxBusEvent() {
+
+    }
+
+    @Override
     public void initPresenter() {
 
     }

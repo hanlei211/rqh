@@ -26,7 +26,10 @@ public abstract  class BaseMvpActivity<T extends BasePresenter, E extends BaseMo
         mRxManager=new RxManager();
         mRxLife = RxLife.create();
         initPresenter();
+        onRxBusEvent();
     }
+
+    protected abstract void onRxBusEvent();
 
     //简单页面无需mvp就不用管此方法即可,完美兼容各种实际场景的变通
     public abstract void initPresenter();

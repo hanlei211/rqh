@@ -4,16 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hl.lib.common.base.BaseRecyclerView;
 import com.hl.lib.common.base.BaseRefreshMvpFragment;
-import com.hl.lib.common.baserx.RxBus;
-import com.hl.lib.common.baserx.RxManager;
 import com.hl.lib.common.http.event.BaseRxBusEvent;
-import com.hl.lib.common.util.ToastUtil;
 import com.hl.lib_news.R;
 import com.hl.lib_news.ui.adapter.NewsListAdapter;
 import com.hl.lib_news.ui.bean.DataBean;
@@ -25,8 +22,6 @@ import com.hl.lib_news.ui.presenter.NewsListPresenter;
 
 import java.util.List;
 
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class NewsListFragment extends BaseRefreshMvpFragment<NewsListPresenter, NewsListModel> implements NewsListContract.View {
@@ -49,6 +44,17 @@ public class NewsListFragment extends BaseRefreshMvpFragment<NewsListPresenter, 
     }
 
     @Override
+    protected void onRxBusEvent() {
+        mRxManager.on(BaseRxBusEvent.class, NewsConstant.NEWS_LIST_TO_TOP, new Consumer<BaseRxBusEvent>() {
+            @Override
+            public void accept(BaseRxBusEvent baseRxBusEvent) throws Exception {
+                Log.e("rxBus","333");
+                scrollToTop();
+            }
+        });
+    }
+
+    @Override
     protected int onBindRreshLayout() {
         return R.id.refview_news_list;
     }
@@ -66,9 +72,9 @@ public class NewsListFragment extends BaseRefreshMvpFragment<NewsListPresenter, 
 
     @Override
     public void initData() {
-        mPresenter.setVM(this, mModel);
-        mPresenter.getNewsListData(newsType);
+
     }
+
 
     @Override
     public void initView(View view) {
@@ -118,12 +124,8 @@ public class NewsListFragment extends BaseRefreshMvpFragment<NewsListPresenter, 
 
     @Override
     public void initPresenter() {
-      mRxManager.on(BaseRxBusEvent.class, NewsConstant.NEWS_LIST_TO_TOP, new Consumer<BaseRxBusEvent>() {
-          @Override
-          public void accept(BaseRxBusEvent baseRxBusEvent) throws Exception {
-              Log.e("rxBus","333");
-          }
-      });
+        mPresenter.setVM(this, mModel);
+        mPresenter.getNewsListData(newsType);
     }
     @Override
     public void onRefreshEvent() {

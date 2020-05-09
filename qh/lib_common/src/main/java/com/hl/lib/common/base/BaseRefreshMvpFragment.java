@@ -40,8 +40,11 @@ public abstract class BaseRefreshMvpFragment<T extends BaseRefreshPresenter,E ex
             mPresenter.mContext =this.getActivity();
         }
         initPresenter();
+        onRxBusEvent();
         return mView;
     }
+
+    protected abstract void onRxBusEvent();
 
     @Override
     public void initCommonView(View view) {

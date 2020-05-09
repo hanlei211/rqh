@@ -46,8 +46,14 @@ public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMain
     }
 
     @Override
-    public void initPresenter() {
+    protected void onRxBusEvent() {
 
+    }
+
+    @Override
+    public void initPresenter() {
+        mPresenter.setVM(this, mModel);
+        mPresenter.getListNewsType();
     }
 
     @Override
@@ -62,8 +68,6 @@ public class MainNewFragment extends BaseMvpFragment<NewsMainPresenter, NewsMain
 
     @Override
     public void initData() {
-        mPresenter.setVM(this, mModel);
-        mPresenter.getListNewsType();
     }
 
     @Override
