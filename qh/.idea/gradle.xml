@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/lib_irecyclerview" />
             <option value="$PROJECT_DIR$/module_main" />
             <option value="$PROJECT_DIR$/module_news" />
+            <option value="$PROJECT_DIR$/module_video" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

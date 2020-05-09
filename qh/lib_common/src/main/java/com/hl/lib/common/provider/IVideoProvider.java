@@ -12,5 +12,5 @@ import com.alibaba.android.arouter.facade.template.IProvider;
  * Update:     <br>
  */
 public interface IVideoProvider extends IProvider {
-    Fragment getMainFindFragment();
+    Fragment getMainVideoFragment();
 }

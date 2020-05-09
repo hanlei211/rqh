@@ -76,7 +76,7 @@ public class MainActivity extends BaseActivity {
             mNewsFragment = mNewsProvider.getMainNewsFragment();
         }
         if(mVideoProvider != null){
-            mVideoFragment = mVideoProvider.getMainFindFragment();
+            mVideoFragment = mVideoProvider.getMainVideoFragment();
         }
         if(mAttentionProvider != null){
             mAttentionFragment = mAttentionProvider.getMainFindFragment();
