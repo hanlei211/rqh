@@ -7,4 +7,6 @@ public class VideoBean implements Serializable {
     public String cover_x;
     public String title;
     public String url;
+    public String cover;
+    public String cover_y;
 }

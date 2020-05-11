@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hl.lib.common.base.BaseRefreshMvpFragment;
@@ -23,14 +23,14 @@ import java.util.List;
 import io.reactivex.functions.Consumer;
 
 public class VideoListFragment extends BaseRefreshMvpFragment<VideoListPresenter, VideoListModel> implements VideoListContract.View {
-    public String newsType;
+    public String videoType;
     public RecyclerView mRecylerView;
     public VideoListAdapter videoListAdapter;
 
     public static VideoListFragment newInstance(String newsType) {
         VideoListFragment newsListFragment = new VideoListFragment();
         Bundle args = new Bundle();
-        args.putString("newsType", newsType);
+        args.putString("videoType", newsType);
         newsListFragment.setArguments(args);
         return newsListFragment;
     }
@@ -38,7 +38,7 @@ public class VideoListFragment extends BaseRefreshMvpFragment<VideoListPresenter
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        newsType = getArguments().getString("newsType");
+        videoType = getArguments().getString("videoType");
     }
 
     @Override
@@ -87,8 +87,8 @@ public class VideoListFragment extends BaseRefreshMvpFragment<VideoListPresenter
     @Override
     public void showVideoList(List<VideoBean> videoBeans) {
 //        addBanner(videoBeans);
-        videoListAdapter = new VideoListAdapter(getContext(), videoBeans);
-        mRecylerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        videoListAdapter = new VideoListAdapter(getContext(),R.layout.item_list, videoBeans);
+        mRecylerView.setLayoutManager(new GridLayoutManager(mActivity,3));
         mRecylerView.setAdapter(videoListAdapter);
     }
 
@@ -122,26 +122,26 @@ public class VideoListFragment extends BaseRefreshMvpFragment<VideoListPresenter
     @Override
     public void initPresenter() {
         mPresenter.setVM(this, mModel);
-        mPresenter.getVideoList(newsType);
+        mPresenter.getVideoList(videoType);
     }
     @Override
     public void onRefreshEvent() {
         if (mPresenter != null) {
-            mPresenter.setVideoType(newsType);
+            mPresenter.setVideoType(videoType);
             mPresenter.refreshData();
         }
     }
 
     @Override
     public void onLoadMoreEvent() {
-        mPresenter.setVideoType(newsType);
+        mPresenter.setVideoType(videoType);
         mPresenter.loadMoreData();
     }
 
     @Override
     public void onAutoLoadEvent() {
         if (mPresenter != null) {
-            mPresenter.setVideoType(newsType);
+            mPresenter.setVideoType(videoType);
             mPresenter.refreshData();
         }
     }

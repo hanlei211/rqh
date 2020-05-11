@@ -32,6 +32,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    resourcePrefix "video_"
+
     sourceSets {
         main {
             if (isModule.toBoolean()) {

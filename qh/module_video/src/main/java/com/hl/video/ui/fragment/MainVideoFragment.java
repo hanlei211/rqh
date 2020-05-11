@@ -23,9 +23,8 @@ import java.util.List;
 public class MainVideoFragment extends BaseMvpFragment<VideoMainPresenter, VideoMainModel> implements VideoMainContract.View{
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
-    private ImageView imageView;
     private List<String> titles = new ArrayList<>();
-    private List<VideoListFragment> newsListFragments = new ArrayList<>();
+    private List<VideoListFragment> videoListFragments = new ArrayList<>();
     private NewsFragmentAdapter adapter;
 
     public static MainVideoFragment newInstance() {
@@ -67,40 +66,29 @@ public class MainVideoFragment extends BaseMvpFragment<VideoMainPresenter, Video
     public void initView(View view) {
       mViewPager = view.findViewById(R.id.pager_tour);
       mTabLayout = view.findViewById(R.id.layout_tour);
-      imageView = view.findViewById(R.id.add_channel_iv);
-      imageView.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-//              startActivity(NewsChannelActivitiy.class);
-//                mRxManager.post(NewsConstant.NEWS_LIST_TO_TOP,"");
-              RxBus rxBus = RxBus.getInstance();
-               //发送事件
-              rxBus.post(new BaseRxBusEvent());
-          }
-      });
     }
 
 
     @Override
     public void showVideoTitle(List<String> videoType) {
-        newsListFragments.clear();
+        videoListFragments.clear();
         titles.clear();
         if(videoType != null){
             for(String newType : videoType){
                 titles.add(newType);
-                newsListFragments.add(VideoListFragment.newInstance(newType));
+                videoListFragments.add(VideoListFragment.newInstance(newType));
             }
         }
     }
 
     @Override
     public void initTabLayout() {
-        adapter  =  new NewsFragmentAdapter(getContext(),getChildFragmentManager(),titles,newsListFragments);
+        adapter  =  new NewsFragmentAdapter(getContext(),getChildFragmentManager(),titles,videoListFragments);
         mViewPager.setAdapter(adapter);
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                newsListFragments.get(tab.getPosition()).autoLoadData();
+                videoListFragments.get(tab.getPosition()).autoLoadData();
             }
 
             @Override

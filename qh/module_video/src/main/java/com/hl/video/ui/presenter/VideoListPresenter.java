@@ -3,10 +3,12 @@ import com.hl.lib.common.http.callback.ResultCallback;
 import com.hl.lib.common.http.exception.ExceptionHandle;
 import com.hl.lib.common.http.listener.RequestListener;
 import com.hl.lib.common.http.request.RxRequest;
+import com.hl.lib.common.http.request.RxRequest1;
 import com.hl.lib.common.util.LogUtils;
 import com.hl.lib.common.util.NetUtil;
 import com.hl.video.api.VideoApi;
 import com.hl.video.ui.bean.VideoBean;
+import com.hl.video.ui.bean.VideoListBean;
 import com.hl.video.ui.config.VideoConstant;
 import com.hl.video.ui.contract.VideoListContract;
 
@@ -23,7 +25,7 @@ public class VideoListPresenter extends VideoListContract.Presenter {
             mView.showNetErrView();
             return;
         }
-        RxRequest.create(VideoApi.api().getTvList(VideoConstant.VIDEO_TYPE_TV,videoType)).listener(new RequestListener() {
+        RxRequest1.create(VideoApi.api().getTvList(VideoConstant.VIDEO_TYPE_TV,videoType)).listener(new RequestListener() {
             private long timeStart = 0;
             @Override
             public void onStart() {
@@ -42,14 +44,14 @@ public class VideoListPresenter extends VideoListContract.Presenter {
                 long cast = System.currentTimeMillis() - timeStart;
                 LogUtils.logd(cast+"");
             }
-        }).request(new ResultCallback<VideoBean>() {
+        }).request(new ResultCallback<VideoListBean>() {
             @Override
-            public void onSuccess(int code, VideoBean data) {
-//                if (data.list != null && data.list.size() > 0) {
-//                    mView.refreshData(data.list);
-//                } else {
-//                    mView.showNoDataView();
-//                }
+            public void onSuccess(int code, VideoListBean data) {
+                if (data.subjects != null && data.subjects.size() > 0) {
+                    mView.refreshData(data.subjects);
+                } else {
+                    mView.showNoDataView();
+                }
                 mView.stopRefresh();
             }
 
@@ -65,7 +67,7 @@ public class VideoListPresenter extends VideoListContract.Presenter {
             mView.showNetErrView();
             return;
         }
-        RxRequest.create(VideoApi.api().getTvList(VideoConstant.VIDEO_TYPE_TV,videoType)).listener(new RequestListener() {
+        RxRequest1.create(VideoApi.api().getTvList(VideoConstant.VIDEO_TYPE_TV,videoType)).listener(new RequestListener() {
             private long timeStart = 0;
             @Override
             public void onStart() {
@@ -84,14 +86,14 @@ public class VideoListPresenter extends VideoListContract.Presenter {
                 long cast = System.currentTimeMillis() - timeStart;
                 LogUtils.logd(cast+"");
             }
-        }).request(new ResultCallback<VideoBean>() {
+        }).request(new ResultCallback<VideoListBean>() {
             @Override
-            public void onSuccess(int code, VideoBean data) {
-//                if (data.list != null && data.list.size() > 0) {
-//                    mView.loadMoreData(data.list);
-//                } else {
-//                    mView.showNoDataView();
-//                }
+            public void onSuccess(int code, VideoListBean data) {
+                if (data.subjects != null && data.subjects.size() > 0) {
+                    mView.loadMoreData(data.subjects);
+                } else {
+                    mView.showNoDataView();
+                }
                 mView.stopLoadMore();
             }
 
@@ -108,7 +110,7 @@ public class VideoListPresenter extends VideoListContract.Presenter {
             mView.showNetErrView();
             return;
         }
-        RxRequest.create(VideoApi.api().getTvList(VideoConstant.VIDEO_TYPE_TV,videoType)).listener(new RequestListener() {
+        RxRequest1.create(VideoApi.api().getTvList(VideoConstant.VIDEO_TYPE_TV,videoType)).listener(new RequestListener() {
             private long timeStart = 0;
             @Override
             public void onStart() {
@@ -127,14 +129,14 @@ public class VideoListPresenter extends VideoListContract.Presenter {
                 long cast = System.currentTimeMillis() - timeStart;
                 LogUtils.logd(cast+"");
             }
-        }).request(new ResultCallback<VideoBean>() {
+        }).request(new ResultCallback<VideoListBean>() {
             @Override
-            public void onSuccess(int code, VideoBean data) {
-//                if (data.list != null && data.list.size() > 0) {
-//                    mView.showNewsListData(data.list);
-//                } else {
-//                    mView.showNoDataView();
-//                }
+            public void onSuccess(int code, VideoListBean data) {
+                if (data.subjects != null && data.subjects.size() > 0) {
+                    mView.showVideoList(data.subjects);
+                } else {
+                    mView.showNoDataView();
+                }
                 mView.stopRefresh();
             }
 

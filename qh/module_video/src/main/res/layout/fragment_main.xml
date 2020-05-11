@@ -24,16 +24,6 @@
             app:tabSelectedTextColor="@color/main_color"
             app:tabTextAppearance="@style/TabLayoutTextStyle"
             app:tabTextColor="@color/color_white" />
-        <ImageView
-            android:id="@+id/add_channel_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:maxHeight="?attr/actionBarSize"
-            android:padding="@dimen/item_margin"
-            android:src="@drawable/ic_add"
-            tools:ignore="ContentDescription" />
     </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager

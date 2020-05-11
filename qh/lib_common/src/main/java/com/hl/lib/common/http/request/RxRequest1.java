@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import com.hl.lib.common.http.RxHttp;
 import com.hl.lib.common.http.RxLife;
 import com.hl.lib.common.http.callback.ResultCallback;
+import com.hl.lib.common.http.config.HttpConfig;
 import com.hl.lib.common.http.exception.ApiException;
 import com.hl.lib.common.http.exception.ExceptionHandle;
 import com.hl.lib.common.http.listener.RequestListener;
@@ -17,9 +18,10 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Response;
 
 
-public class RxRequest<T, R extends BaseReponse<T>> {
+public class RxRequest1<T, R extends Response<T>> {
 
     private final Observable<R> mObserVable;
     private ResultCallback<T> mCallBack = null;
@@ -27,18 +29,18 @@ public class RxRequest<T, R extends BaseReponse<T>> {
     private RxLife mRxLife = null;
 
 
-    public RxRequest(Observable<R> obserVable) {
+    public RxRequest1(Observable<R> obserVable) {
         mObserVable = obserVable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static <T, R extends BaseReponse<T>> RxRequest<T, R> create(@NonNull Observable observable) {
-        return new RxRequest<>(observable);
+    public static <T, R extends Response<T>> RxRequest1<T, R> create(@NonNull Observable observable) {
+        return new RxRequest1<>(observable);
     }
 
     /**
      * 添加请求生命周期的监听
      */
-    public RxRequest<T, R> listener(RequestListener listener) {
+    public RxRequest1<T, R> listener(RequestListener listener) {
         this.mListener = listener;
         return this;
     }
@@ -60,11 +62,11 @@ public class RxRequest<T, R extends BaseReponse<T>> {
 
             @Override
             public void onNext(R r) {
-                LogUtils.logd(r.toString());
-                if (!isSuccess(r.getCode())) {
-                    mCallBack.onFailed(r.getCode(), r.getMsg());
+                LogUtils.logd(r.body().toString());
+                if (!isSuccess(r.code())) {
+                    mCallBack.onFailed(r.code(), r.message());
                 } else {
-                    mCallBack.onSuccess(r.getCode(), r.getData());
+                    mCallBack.onSuccess(r.code(), r.body());
                 }
             }
 
@@ -102,17 +104,8 @@ public class RxRequest<T, R extends BaseReponse<T>> {
      * @return
      */
     public boolean isSuccess(int code) {
-        if (code == RxHttp.getRequestSetting().getSuccessCode()) {
+        if (code == HttpConfig.OKHTTP_SUCCESS_CODE) {
             return true;
-        }
-        int[] codes = RxHttp.getRequestSetting().getMultiSuccessCode();
-        if (codes == null && codes.length <= 0) {
-            return false;
-        }
-        for (int i : codes) {
-            if (code == i) {
-                return true;
-            }
         }
         return false;
     }
